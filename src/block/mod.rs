@@ -77,6 +77,11 @@ pub enum Block {
         action: SelectObject,
         sub_action: SelectSubAction,
     },
+    /// A Repeat, Used to repeat code.
+    /// Has a one to one mapping with Diamond Fire Repeat.
+    Repeat {
+        action: Repeat,
+    },
     /// A Function definition, Used to define functions.
     /// Has a one to one mapping with Diamond Fire Function.
     Function {

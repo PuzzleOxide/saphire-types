@@ -12,4 +12,5 @@ pub use super::block_types::{
     control::Control,
     select_object::SelectObject,
     select_subaction::SelectSubAction,
+    repeat::Repeat,
 };
