@@ -173,8 +173,7 @@ impl Block {
                     },
                 }
             ),
-        }.to_string();
-        todo!("Compile RawBlock")
+        }.to_string()
     }
 }
 
