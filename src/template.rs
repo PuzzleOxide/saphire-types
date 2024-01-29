@@ -4,7 +4,7 @@ use crate::block::Block;
 use flate2::{write::GzEncoder, Compression};
 use base64::{engine::general_purpose, Engine as _};
 
-/// A template, used to store a list of blocks and to generate code.
+/// A diamondfire template, used to store a list of blocks and to generate code.
 pub struct Template {
     /// The name of the template.
     pub name: String,
@@ -30,6 +30,6 @@ impl Template {
         
         let mut e = GzEncoder::new(Vec::new(), Compression::default());
         e.write_all(code.as_bytes()).unwrap();
-        general_purpose::STANDARD.encode(e.finish().unwrap())
+        general_purpose::STANDARD.encode(e.finish().unwrap()) //TODO: wrap in item nbt
     }
 }
