@@ -3,6 +3,7 @@ use std::io::Write;
 use crate::block::Block;
 use flate2::{write::GzEncoder, Compression};
 use base64::{engine::general_purpose, Engine as _};
+use serde_json::Value;
 
 /// A diamondfire template, used to store a list of blocks and to generate code.
 pub struct Template {
@@ -21,13 +22,18 @@ impl Template {
         }
     }
 
+    /// Gerates template json.
+    pub fn json(&self) -> Value {
+        let mut code = Vec::new();
+        for block in &self.blocks {
+            code.push(block.compile());
+        }
+        Value::Array(code)
+    }
+
     /// Generate code from the template.
     pub fn compile(&self) -> String {
-        let mut code = String::new();
-        for block in &self.blocks {
-            code.push_str(&block.compile());
-        }
-        
+        let code = self.json().to_string();
         let mut e = GzEncoder::new(Vec::new(), Compression::default());
         e.write_all(code.as_bytes()).unwrap();
         general_purpose::STANDARD.encode(e.finish().unwrap()) //TODO: wrap in item nbt

@@ -5,8 +5,19 @@ use saphire_types::targets::PlayerTarget;
 use saphire_types::types::*;
 
 fn main() -> () {
-    Template::new("simple_join".to_string(), vec![
-        B::PlayerEvent { event: PlayerEvent::PlayerJoinGameEvent {} },
-        B::PlayerAction { action: PlayerAction::SendMessage { message_to_send: vec![MiniMessage{ value: "test".to_string()}] }, target: PlayerTarget::All},
+    // A simple template that sends a message to all players when a player joins.
+    let template = Template::new("simple_join".to_string(), vec![
+        B::PlayerEvent {
+            event: PlayerEvent::PlayerJoinGameEvent {}
+        },
+        B::PlayerAction {
+            action: PlayerAction::SendMessage {
+                message_to_send: vec![
+                        MiniMessage{ value: "Hello World".to_string()}
+                    ]},
+                target: PlayerTarget::All
+            },
     ]);
+
+    println!("{}", template.compile());
 }

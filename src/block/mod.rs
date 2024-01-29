@@ -117,7 +117,7 @@ pub enum Block {
 
 impl Block {
     /// Compile the block into a string.
-    pub fn compile(&self) -> String {
+    pub fn compile(&self) -> Value {
         
         match self {
             Block::PlayerEvent { event } => event.compile(),
@@ -173,7 +173,7 @@ impl Block {
                     },
                 }
             ),
-        }.to_string()
+        }
     }
 }
 
