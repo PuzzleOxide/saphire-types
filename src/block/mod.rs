@@ -1,7 +1,7 @@
 pub mod block_types;
 pub mod prelude;
 
-use serde_json::Value;
+use serde_json::{Value, Map, json};
 
 use prelude::*;
 use crate::targets::*;
@@ -75,7 +75,6 @@ pub enum Block {
     /// Has a one to one mapping with Diamond Fire Select.
     Select {
         action: SelectObject,
-        sub_action: SelectSubAction,
     },
     /// A Repeat, Used to repeat code.
     /// Has a one to one mapping with Diamond Fire Repeat.
@@ -109,7 +108,6 @@ pub enum Block {
         args: Vec<String>,
         //bl_tags: CallProcessBlockTags,
     },
-    
     /// A Bracket block, Used for loops and if statements.
     Bracket { 
         direct: BracketDirection,
@@ -120,26 +118,62 @@ pub enum Block {
 impl Block {
     /// Compile the block into a string.
     pub fn compile(&self) -> String {
-        // match self {
-        //     RawBlock::PlayerEvent { event } => event.compile(),
-        //     RawBlock::PlayerAction { action, target } => action.compile(target),
-        //     RawBlock::IfPlayer { action, target } => action.compile(target),
-        //     RawBlock::EntityEvent { event } => event.compile(),
-        //     RawBlock::EntityAction { action, target } => action.compile(target),
-        //     RawBlock::IfEntity { action, target } => action.compile(target),
-        //     RawBlock::GameAction { action } => action.compile(),
-        //     RawBlock::IfGame { action } => action.compile(),
-        //     RawBlock::SetVariable { action } => action.compile(),
-        //     RawBlock::IfVariable { action } => action.compile(),
-        //     RawBlock::Else => Value::Null,
-        //     RawBlock::Control { action } => action.compile(),
-        //     RawBlock::Select { action, sub_action } => action.compile(sub_action),
-        //     RawBlock::Function { data, args, bl_tags } => bl_tags.compile(data, args),
-        //     RawBlock::CallFunction { data, args } => Value::Null,
-        //     RawBlock::Process { data, args, bl_tags } => bl_tags.compile(data, args),
-        //     RawBlock::CallProcess { data, args, bl_tags } => bl_tags.compile(data, args),
-        //     RawBlock::Bracket { direct, typ } => Value::Null,
-        // }
+        
+        match self {
+            Block::PlayerEvent { event } => event.compile(),
+            Block::PlayerAction { action, target } => {
+                let mut value = action.compile();
+                value.as_object_mut().unwrap().insert("target".to_string(), Value::String(target.to_string()));
+                value
+            },
+            Block::IfPlayer { action, target } => {
+                let mut value = action.compile();
+                value.as_object_mut().unwrap().insert("target".to_string(), Value::String(target.to_string()));
+                value
+            },
+            Block::EntityEvent { event } => event.compile(),
+            Block::EntityAction { action, target } => {
+                let mut value = action.compile();
+                value.as_object_mut().unwrap().insert("target".to_string(), Value::String(target.to_string()));
+                value
+            },
+            Block::IfEntity { action, target } => {
+                let mut value = action.compile();
+                value.as_object_mut().unwrap().insert("target".to_string(), Value::String(target.to_string()));
+                value
+            },
+            Block::GameAction { action } => action.compile(),
+            Block::IfGame { action } => action.compile(),
+            Block::SetVariable { action } => action.compile(),
+            Block::IfVariable { action } => action.compile(),
+            Block::Else => Value::Null,
+            Block::Control { action } => action.compile(),
+            Block::Select { action} => action.compile(),
+            Block::Repeat { action } => action.compile(),
+            Block::Function { data, args } => {
+                todo!("Add block tags")
+            },
+            Block::CallFunction { data, args } => Value::Null,
+            Block::Process { data, args } => {
+                todo!("Add block tags")
+            },
+            Block::CallProcess { data, args } => {
+                todo!("Add block tags")
+            },
+            Block::Bracket { direct, typ } => json!(
+                {
+                    "id": "bracket",
+                    "direct": match direct {
+                        BracketDirection::Open => "open",
+                        BracketDirection::Close => "close",
+                    },
+                    "type": match typ {
+                        BracketType::Norm => "norm",
+                        BracketType::Reapeat => "repeat",
+                    },
+                }
+            ),
+        }.to_string();
         todo!("Compile RawBlock")
     }
 }
