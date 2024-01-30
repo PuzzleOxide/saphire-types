@@ -2,7 +2,7 @@ use either::Either;
 use serde_json::{Value, Map};
 
 /// turns a vector of arguments into a vector of json objects
-pub fn compile(args: Vec<Vec<Map<String, Value>>>) -> Vec<Value> {
+pub fn compile(args: Vec<Vec<Map<String, Value>>>, tags: Vec<Map<String, Value>>) -> Vec<Value> {
     let mut vec = Vec::new();
     for (i, arg)  in args.into_iter().flatten().enumerate() {
         let mut map = Map::new();
@@ -10,10 +10,17 @@ pub fn compile(args: Vec<Vec<Map<String, Value>>>) -> Vec<Value> {
         map.insert("item".to_string(), Value::Object(arg));
         vec.push(Value::Object(map));
     };
+
+    for (tag, i) in tags.iter().zip(26..0) {
+        let mut map = Map::new();
+        map.insert("slot".to_string(), Value::Number(serde_json::Number::from(i)));
+        map.insert("item".to_string(), Value::Object(tag.clone()));
+        vec.push(Value::Object(map));
+    } 
     vec
 }
 
-impl<L, R> Argument for Either<L, R> where L: Argument, R: Argument {
+impl<L, R> Literal for Either<L, R> where L: Literal, R: Literal {
     fn json(&self) -> Vec<Map<String, Value>> {
         match self {
             Either::Left(l) => l.json(),
@@ -23,12 +30,12 @@ impl<L, R> Argument for Either<L, R> where L: Argument, R: Argument {
 }
 
 /// A trait for any literal value that can be used as an argument item.
-pub(crate) trait Argument {
+pub(crate) trait Literal {
     /// Must return a json string representing the argument.
     fn json(&self) -> Vec<Map<String, Value>>;
 }
 
-impl<T: Argument> Argument for Vec<T> {
+impl<T: Literal> Literal for Vec<T> {
     fn json(&self) -> Vec<Map<String, Value>> {
         let mut vec = Vec::new();
         for item in self {
@@ -38,7 +45,7 @@ impl<T: Argument> Argument for Vec<T> {
     }
 }
 
-impl<T: Argument> Argument for Option<T> {
+impl<T: Literal> Literal for Option<T> {
     fn json(&self) -> Vec<Map<String, Value>> {
         match self {
             Some(item) => item.json(),
@@ -47,11 +54,18 @@ impl<T: Argument> Argument for Option<T> {
     }
 }
 
+pub(crate) struct Tag {
+    pub(crate) option: String,
+    pub(crate) tag: String,
+    pub(crate) action: String,
+    pub(crate) block: String,
+}
+
 pub struct Number {
     pub value: String,
 }
 
-impl Argument for Number {
+impl Literal for Number {
     fn json(&self) -> Vec<Map<String, Value>> {
         let mut map = Map::new();
         let mut data = Map::new();
@@ -67,7 +81,7 @@ pub struct Text {
     pub value: String,
 }
 
-impl Argument for Text {
+impl Literal for Text {
     fn json(&self) -> Vec<Map<String, Value>> {
         let mut map = Map::new();
         let mut data = Map::new();
@@ -83,7 +97,7 @@ pub struct MiniMessage {
     pub value: String,
 }
 
-impl Argument for MiniMessage {
+impl Literal for MiniMessage {
     fn json(&self) -> Vec<Map<String, Value>> {
         let mut map = Map::new();
         let mut data = Map::new();
@@ -103,7 +117,7 @@ pub struct Location {
     pub yaw: f64,
 }
 
-impl Argument for Location {
+impl Literal for Location {
     fn json(&self) -> Vec<Map<String, Value>> {
         let mut map = Map::new();
         let mut data = Map::new();
@@ -123,7 +137,7 @@ pub struct Item {
     pub item: String,
 }
 
-impl Argument for Item {
+impl Literal for Item {
     fn json(&self) -> Vec<Map<String, Value>> {
         todo!("compile items");
     }
@@ -133,7 +147,7 @@ pub struct Particle {
     pub particle: String,
 }
 
-impl Argument for Particle {
+impl Literal for Particle {
     fn json(&self) -> Vec<Map<String, Value>> {
         todo!("compile particles");
     }
@@ -145,7 +159,7 @@ pub struct Vector {
     pub z: f64,
 }
 
-impl Argument for Vector {
+impl Literal for Vector {
     fn json(&self) -> Vec<Map<String, Value>> {
         let mut map = Map::new();
         let mut data = Map::new();
@@ -163,7 +177,7 @@ pub struct Sound {
     pub sound: String,
 }
 
-impl Argument for Sound {
+impl Literal for Sound {
     fn json(&self) -> Vec<Map<String, Value>> {
         todo!("compile sounds");
     }
@@ -174,7 +188,7 @@ pub enum Block {
     Item(Item),
 }
 
-impl Argument for Block {
+impl Literal for Block {
     fn json(&self) -> Vec<Map<String, Value>> {
         match self {
             Block::Text(text) => text.json(),
@@ -187,7 +201,7 @@ pub struct BlockTag {
     pub block_tag: String,
 }
 
-impl Argument for BlockTag {
+impl Literal for BlockTag {
     fn json(&self) -> Vec<Map<String, Value>> {
         todo!("compile block tags");
     }
@@ -197,7 +211,7 @@ pub struct Projectile {
     pub projectile: Item,
 }
 
-impl Argument for Projectile {
+impl Literal for Projectile {
     fn json(&self) -> Vec<Map<String, Value>> {
         todo!("compile projectiles");
     }
@@ -207,7 +221,7 @@ pub struct Potion {
     pub potion: String,
 }
 
-impl Argument for Potion {
+impl Literal for Potion {
     fn json(&self) -> Vec<Map<String, Value>> {
         todo!("compile potions");
     }
@@ -217,7 +231,7 @@ pub struct SpawnEgg {
     pub spawn_egg: Item,
 }
 
-impl Argument for SpawnEgg {
+impl Literal for SpawnEgg {
     fn json(&self) -> Vec<Map<String, Value>> {
         self.spawn_egg.json()
     }
@@ -227,7 +241,7 @@ pub struct EntityType {
     pub entity_type: String,
 }
 
-impl Argument for EntityType {
+impl Literal for EntityType {
     fn json(&self) -> Vec<Map<String, Value>> {
         todo!("compile entity types");
     }
@@ -237,7 +251,7 @@ pub struct Variable {
     pub variable: String,
 }
 
-impl Argument for Variable {
+impl Literal for Variable {
     fn json(&self) -> Vec<Map<String, Value>> {
         todo!("compile variables");
     }
@@ -261,7 +275,7 @@ pub enum AnyType {
     Variable(Variable),
 }
 
-impl Argument for AnyType {
+impl Literal for AnyType {
     fn json(&self) -> Vec<Map<String, Value>> {
         match self {
             AnyType::Number(arg) => arg.json(),
@@ -287,7 +301,7 @@ pub struct Dict {
     pub dict: String,
 }
 
-impl Argument for Dict {
+impl Literal for Dict {
     fn json(&self) -> Vec<Map<String, Value>> {
         todo!("compile dicts");
     }
@@ -297,7 +311,7 @@ pub struct List {
     pub list: String,
 }
 
-impl Argument for List {
+impl Literal for List {
     fn json(&self) -> Vec<Map<String, Value>> {
         todo!("compile lists");
     }
@@ -307,7 +321,7 @@ pub struct Vehicle {
     pub vehicle: String,
 }
 
-impl Argument for Vehicle {
+impl Literal for Vehicle {
     fn json(&self) -> Vec<Map<String, Value>> {
         todo!("compile vehicles");
     }    

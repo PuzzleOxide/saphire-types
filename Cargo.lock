@@ -176,7 +176,7 @@ checksum = "f98d2aa92eebf49b69786be48e4477826b256916e84a57ff2a4f21923b48eb4c"
 [[package]]
 name = "saphire-typegen"
 version = "0.1.0"
-source = "git+https://github.com/PuzzleOxide/saphire-typegen.git#47ac7f3ae9a02aedfbf56620f27ccfd0dfc87781"
+source = "git+https://github.com/PuzzleOxide/saphire-typegen.git#eef17f0cc75eef6062973917bc2dc8d9cbbe7c49"
 dependencies = [
  "prettier-please",
  "proc-macro2",

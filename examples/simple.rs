@@ -12,11 +12,13 @@ fn main() -> () {
         },
         B::PlayerAction {
             action: PlayerAction::SendMessage {
-                message_to_send: vec![
-                        MiniMessage{ value: "Hello World".to_string()}
-                    ]},
-                target: PlayerTarget::All
-            },
+                message_to_send:vec![MiniMessage{value:"Hello World".to_string()}],
+                alignment_mode_tag: Default::default(),
+                inherit_styles_tag: Default::default(),
+                text_value_merging_tag: Default::default(),
+        },
+            target: PlayerTarget::All
+        },
     ]);
 
     println!("{}", template.compile());

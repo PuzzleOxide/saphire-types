@@ -21,7 +21,7 @@ impl EntityEvent {
         match self {
             EntityEvent::EntityKillEntityEvent {} => {
                 let mut map = serde_json::Map::new();
-                let item_args = compile(vec![]);
+                let mut item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -33,7 +33,7 @@ impl EntityEvent {
             }
             EntityEvent::BlockFallEvent {} => {
                 let mut map = serde_json::Map::new();
-                let item_args = compile(vec![]);
+                let mut item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -45,7 +45,7 @@ impl EntityEvent {
             }
             EntityEvent::EntityTakeDamageEvent {} => {
                 let mut map = serde_json::Map::new();
-                let item_args = compile(vec![]);
+                let mut item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -57,7 +57,7 @@ impl EntityEvent {
             }
             EntityEvent::ProjectileDamageEntityEvent {} => {
                 let mut map = serde_json::Map::new();
-                let item_args = compile(vec![]);
+                let mut item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -69,7 +69,7 @@ impl EntityEvent {
             }
             EntityEvent::ProjectileKillEntityEvent {} => {
                 let mut map = serde_json::Map::new();
-                let item_args = compile(vec![]);
+                let mut item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -81,7 +81,7 @@ impl EntityEvent {
             }
             EntityEvent::EntityExplodeEvent {} => {
                 let mut map = serde_json::Map::new();
-                let item_args = compile(vec![]);
+                let mut item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -93,7 +93,7 @@ impl EntityEvent {
             }
             EntityEvent::EntityDeathEvent {} => {
                 let mut map = serde_json::Map::new();
-                let item_args = compile(vec![]);
+                let mut item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -105,7 +105,7 @@ impl EntityEvent {
             }
             EntityEvent::VehicleTakeDamageEvent {} => {
                 let mut map = serde_json::Map::new();
-                let item_args = compile(vec![]);
+                let mut item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -117,7 +117,7 @@ impl EntityEvent {
             }
             EntityEvent::EntityDamageEntityEvent {} => {
                 let mut map = serde_json::Map::new();
-                let item_args = compile(vec![]);
+                let mut item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -129,7 +129,7 @@ impl EntityEvent {
             }
             EntityEvent::FallingBlockLandEvent {} => {
                 let mut map = serde_json::Map::new();
-                let item_args = compile(vec![]);
+                let mut item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -141,7 +141,7 @@ impl EntityEvent {
             }
             EntityEvent::EntityResurrectEvent {} => {
                 let mut map = serde_json::Map::new();
-                let item_args = compile(vec![]);
+                let mut item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -153,7 +153,7 @@ impl EntityEvent {
             }
             EntityEvent::SheepRegrowWoolEvent {} => {
                 let mut map = serde_json::Map::new();
-                let item_args = compile(vec![]);
+                let mut item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
