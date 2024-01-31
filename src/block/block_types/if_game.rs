@@ -54,7 +54,7 @@ impl IfGame {
         match self {
             IfGame::SignHasTxt { sign_line_tag, check_mode_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![sign_line_tag.json(), check_mode_tag.json()],
                 );
@@ -73,7 +73,7 @@ impl IfGame {
                 check_mode_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![container_location.json(), items_to_check_with.json()],
                     vec![check_mode_tag.json()],
                 );
@@ -88,7 +88,7 @@ impl IfGame {
             }
             IfGame::EventBlockEquals { blocks_to_check_for } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![blocks_to_check_for.json()], vec![]);
+                let item_args = compile(vec![blocks_to_check_for.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -104,7 +104,7 @@ impl IfGame {
                 ignore_case_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![strings_to_check_for.json()],
                     vec![check_mode_tag.json(), ignore_case_tag.json()],
                 );
@@ -119,7 +119,7 @@ impl IfGame {
             }
             IfGame::EventItemEquals { items_to_check_for, comparison_mode_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![items_to_check_for.json()],
                     vec![comparison_mode_tag.json()],
                 );
@@ -140,7 +140,7 @@ impl IfGame {
                 check_mode_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![sign_location.json(), text_to_check_for.json()],
                     vec![
                         sign_line_tag.json(), sign_side_tag.json(), check_mode_tag.json()
@@ -157,7 +157,7 @@ impl IfGame {
             }
             IfGame::AttackIsCritical {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -169,7 +169,7 @@ impl IfGame {
             }
             IfGame::ContainerHasItem { container_location, items_to_check_for } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![container_location.json(), items_to_check_for.json()],
                     vec![],
                 );
@@ -184,7 +184,7 @@ impl IfGame {
             }
             IfGame::BlockEquals { check_location, blocks_to_check_for, block_data } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         check_location.json(), blocks_to_check_for.json(), block_data
                         .json()
@@ -202,7 +202,7 @@ impl IfGame {
             }
             IfGame::BlockIsPowered { check_locations, redstone_power_mode_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![check_locations.json()],
                     vec![redstone_power_mode_tag.json()],
                 );
@@ -217,7 +217,7 @@ impl IfGame {
             }
             IfGame::GameHasPlayer { name_or_uuid } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![name_or_uuid.json()], vec![]);
+                let item_args = compile(vec![name_or_uuid.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -229,7 +229,7 @@ impl IfGame {
             }
             IfGame::ContainerHasAllItems { container_location, items_to_check_for } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![container_location.json(), items_to_check_for.json()],
                     vec![],
                 );
@@ -248,7 +248,7 @@ impl IfGame {
                 ignore_case_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![strings_to_check_for.json(), argument_number.json()],
                     vec![ignore_case_tag.json()],
                 );
@@ -263,7 +263,7 @@ impl IfGame {
             }
             IfGame::EventIsCancelled {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(

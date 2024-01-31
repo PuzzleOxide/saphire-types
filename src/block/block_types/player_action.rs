@@ -423,7 +423,7 @@ impl PlayerAction {
         match self {
             PlayerAction::SetHotbarItems { items_to_set } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![items_to_set.json()], vec![]);
+                let item_args = compile(vec![items_to_set.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -437,7 +437,7 @@ impl PlayerAction {
                 reduced_debug_info_enabled_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![reduced_debug_info_enabled_tag.json()],
                 );
@@ -452,7 +452,7 @@ impl PlayerAction {
             }
             PlayerAction::CloseInventory {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -464,7 +464,7 @@ impl PlayerAction {
             }
             PlayerAction::GiveItems { items_to_give, amount_to_give } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![items_to_give.json(), amount_to_give.json()],
                     vec![],
                 );
@@ -479,7 +479,7 @@ impl PlayerAction {
             }
             PlayerAction::NoKeepInv {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -491,10 +491,7 @@ impl PlayerAction {
             }
             PlayerAction::SetAllowHandCrafting { allow_hand_crafting_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
-                    vec![],
-                    vec![allow_hand_crafting_tag.json()],
-                );
+                let item_args = compile(vec![], vec![allow_hand_crafting_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -511,7 +508,7 @@ impl PlayerAction {
                 bar_color_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![
                         bar_slot_tag.json(), bar_style_tag.json(), sky_effect_tag.json(),
@@ -533,7 +530,7 @@ impl PlayerAction {
                 diameter,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![effect.json(), center_location.json(), diameter.json()],
                     vec![],
                 );
@@ -548,7 +545,7 @@ impl PlayerAction {
             }
             PlayerAction::SetBaseAttackSpeed { attack_speed } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![attack_speed.json()], vec![]);
+                let item_args = compile(vec![attack_speed.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -560,7 +557,7 @@ impl PlayerAction {
             }
             PlayerAction::SetVelocity { new_velocity, add_to_current_velocity_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![new_velocity.json()],
                     vec![add_to_current_velocity_tag.json()],
                 );
@@ -575,7 +572,7 @@ impl PlayerAction {
             }
             PlayerAction::DisplayParticleEffect { effect, effect_location } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![effect.json(), effect_location.json()],
                     vec![],
                 );
@@ -593,7 +590,7 @@ impl PlayerAction {
                 new_row_position_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![items_to_display.json()],
                     vec![new_row_position_tag.json()],
                 );
@@ -608,7 +605,7 @@ impl PlayerAction {
             }
             PlayerAction::DisablePvp {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -620,7 +617,7 @@ impl PlayerAction {
             }
             PlayerAction::NoNatRegen {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -632,7 +629,7 @@ impl PlayerAction {
             }
             PlayerAction::DisplayLightningBolt { strike_location } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![strike_location.json()], vec![]);
+                let item_args = compile(vec![strike_location.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -648,7 +645,7 @@ impl PlayerAction {
                 sound_source_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![sound_to_play.json(), target_uuid.json()],
                     vec![sound_source_tag.json()],
                 );
@@ -663,7 +660,7 @@ impl PlayerAction {
             }
             PlayerAction::ReplaceProj {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -675,7 +672,7 @@ impl PlayerAction {
             }
             PlayerAction::Damage { damage_to_inflict, uuid_of_damager_entity } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![damage_to_inflict.json(), uuid_of_damager_entity.json()],
                     vec![],
                 );
@@ -690,7 +687,7 @@ impl PlayerAction {
             }
             PlayerAction::SetExperience { experience_to_set, set_experience_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![experience_to_set.json()],
                     vec![set_experience_tag.json()],
                 );
@@ -705,7 +702,7 @@ impl PlayerAction {
             }
             PlayerAction::SendAnimation { animation_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![animation_type__tag.json()]);
+                let item_args = compile(vec![], vec![animation_type__tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -717,7 +714,7 @@ impl PlayerAction {
             }
             PlayerAction::SetXPProgress { progress__0100 } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![progress__0100.json()], vec![]);
+                let item_args = compile(vec![progress__0100.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -729,7 +726,7 @@ impl PlayerAction {
             }
             PlayerAction::SetInventoryItems { items_to_set } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![items_to_set.json()], vec![]);
+                let item_args = compile(vec![items_to_set.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -741,7 +738,7 @@ impl PlayerAction {
             }
             PlayerAction::TeleportSequence { locations_to, teleport_delay_ticks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![locations_to.json(), teleport_delay_ticks.json()],
                     vec![],
                 );
@@ -756,7 +753,7 @@ impl PlayerAction {
             }
             PlayerAction::Heal { amount_to_heal } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![amount_to_heal.json()], vec![]);
+                let item_args = compile(vec![amount_to_heal.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -768,7 +765,7 @@ impl PlayerAction {
             }
             PlayerAction::SetSpawnPoint { the_new_spawn_location } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![the_new_spawn_location.json()], vec![]);
+                let item_args = compile(vec![the_new_spawn_location.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -787,7 +784,7 @@ impl PlayerAction {
                 rotations,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         effect.json(), base_location.json(), length.json(), diameter
                         .json(), effect_count.json(), rotations.json()
@@ -805,7 +802,7 @@ impl PlayerAction {
             }
             PlayerAction::SetInventoryKept { inventory_kept_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![inventory_kept_tag.json()]);
+                let item_args = compile(vec![], vec![inventory_kept_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -817,7 +814,7 @@ impl PlayerAction {
             }
             PlayerAction::SetAllowFlight { allow_flight_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![allow_flight_tag.json()]);
+                let item_args = compile(vec![], vec![allow_flight_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -829,7 +826,7 @@ impl PlayerAction {
             }
             PlayerAction::LaunchUp { launch_power, add_to_current_velocity_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![launch_power.json()],
                     vec![add_to_current_velocity_tag.json()],
                 );
@@ -847,7 +844,7 @@ impl PlayerAction {
                 heal_player_to_max_health_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![maximum_health.json()],
                     vec![heal_player_to_max_health_tag.json()],
                 );
@@ -862,7 +859,7 @@ impl PlayerAction {
             }
             PlayerAction::RemoveBossBar { boss_bar_position } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![boss_bar_position.json()], vec![]);
+                let item_args = compile(vec![boss_bar_position.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -874,7 +871,7 @@ impl PlayerAction {
             }
             PlayerAction::SetFogDistance { fog_distance_in_chunks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![fog_distance_in_chunks.json()], vec![]);
+                let item_args = compile(vec![fog_distance_in_chunks.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -886,7 +883,7 @@ impl PlayerAction {
             }
             PlayerAction::GetTargetEntity { ignore_blocks_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![ignore_blocks_tag.json()]);
+                let item_args = compile(vec![], vec![ignore_blocks_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -898,7 +895,7 @@ impl PlayerAction {
             }
             PlayerAction::SettoAdventureMode {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -910,7 +907,7 @@ impl PlayerAction {
             }
             PlayerAction::ForceFlightMode { flight_mode_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![flight_mode_tag.json()]);
+                let item_args = compile(vec![], vec![flight_mode_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -922,7 +919,7 @@ impl PlayerAction {
             }
             PlayerAction::LoadSavedInventory {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -934,7 +931,7 @@ impl PlayerAction {
             }
             PlayerAction::SettoSpectatorMode {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -946,7 +943,7 @@ impl PlayerAction {
             }
             PlayerAction::ClearPotionEffects {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -958,7 +955,7 @@ impl PlayerAction {
             }
             PlayerAction::Kick {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -975,7 +972,7 @@ impl PlayerAction {
                 inherit_styles_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![headerfooter_text.json()],
                     vec![
                         player_list_field_tag.json(), text_value_merging_tag.json(),
@@ -993,7 +990,7 @@ impl PlayerAction {
             }
             PlayerAction::EnablePvp {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1005,7 +1002,7 @@ impl PlayerAction {
             }
             PlayerAction::ProjColl {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1017,7 +1014,7 @@ impl PlayerAction {
             }
             PlayerAction::HideDisguise {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1029,7 +1026,7 @@ impl PlayerAction {
             }
             PlayerAction::SpectateTarget { target_uuid } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![target_uuid.json()], vec![]);
+                let item_args = compile(vec![target_uuid.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1041,7 +1038,7 @@ impl PlayerAction {
             }
             PlayerAction::SendHurtAnimation { damage_source } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![damage_source.json()], vec![]);
+                let item_args = compile(vec![damage_source.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1053,7 +1050,7 @@ impl PlayerAction {
             }
             PlayerAction::SettoSurvivalMode {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1073,7 +1070,7 @@ impl PlayerAction {
                 bar_color_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         title.json(), current_health.json(), maximum_health.json(),
                         boss_bar_position.json()
@@ -1093,7 +1090,7 @@ impl PlayerAction {
             }
             PlayerAction::SetSkin { player_head } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![player_head.json()], vec![]);
+                let item_args = compile(vec![player_head.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1105,10 +1102,7 @@ impl PlayerAction {
             }
             PlayerAction::SetSpectatorCollision { spectator_collision_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
-                    vec![],
-                    vec![spectator_collision_tag.json()],
-                );
+                let item_args = compile(vec![], vec![spectator_collision_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1120,7 +1114,7 @@ impl PlayerAction {
             }
             PlayerAction::SetStatus { game_status } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![game_status.json()], vec![]);
+                let item_args = compile(vec![game_status.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1132,7 +1126,7 @@ impl PlayerAction {
             }
             PlayerAction::SetNameTagVisible { name_tag_visible_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![name_tag_visible_tag.json()]);
+                let item_args = compile(vec![], vec![name_tag_visible_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1144,7 +1138,7 @@ impl PlayerAction {
             }
             PlayerAction::SetInvulnerabilityTicks { ticks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![ticks.json()], vec![]);
+                let item_args = compile(vec![ticks.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1156,7 +1150,7 @@ impl PlayerAction {
             }
             PlayerAction::SetCursorItem { item_to_set } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![item_to_set.json()], vec![]);
+                let item_args = compile(vec![item_to_set.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1168,7 +1162,7 @@ impl PlayerAction {
             }
             PlayerAction::SetAbsorptionHealth { absorption_health } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![absorption_health.json()], vec![]);
+                let item_args = compile(vec![absorption_health.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1180,7 +1174,7 @@ impl PlayerAction {
             }
             PlayerAction::SetFireTicks { ticks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![ticks.json()], vec![]);
+                let item_args = compile(vec![ticks.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1192,7 +1186,7 @@ impl PlayerAction {
             }
             PlayerAction::SetGamemode { flight_mode_tag, gamemode_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![flight_mode_tag.json(), gamemode_tag.json()],
                 );
@@ -1210,7 +1204,7 @@ impl PlayerAction {
                 row_to_remove_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![rows_to_remove.json()],
                     vec![row_to_remove_tag.json()],
                 );
@@ -1225,7 +1219,7 @@ impl PlayerAction {
             }
             PlayerAction::EnableFlight {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1237,7 +1231,7 @@ impl PlayerAction {
             }
             PlayerAction::SendWakeUpAnimation {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1249,7 +1243,7 @@ impl PlayerAction {
             }
             PlayerAction::SetBeeStingsStuck { sting_count } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![sting_count.json()], vec![]);
+                let item_args = compile(vec![sting_count.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1261,7 +1255,7 @@ impl PlayerAction {
             }
             PlayerAction::DisallowPlacingBreakingBlocks { blocks_to_disallow } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![blocks_to_disallow.json()], vec![]);
+                let item_args = compile(vec![blocks_to_disallow.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1273,7 +1267,7 @@ impl PlayerAction {
             }
             PlayerAction::SetScoreboardObjectiveName { objective_name } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![objective_name.json()], vec![]);
+                let item_args = compile(vec![objective_name.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1285,7 +1279,7 @@ impl PlayerAction {
             }
             PlayerAction::LSetHealth { heal_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![heal_type__tag.json()]);
+                let item_args = compile(vec![], vec![heal_type__tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1297,7 +1291,7 @@ impl PlayerAction {
             }
             PlayerAction::ParticleEffect {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1312,7 +1306,7 @@ impl PlayerAction {
                 clear_crafting_and_cursor_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![clear_mode_tag.json(), clear_crafting_and_cursor_tag.json()],
                 );
@@ -1327,7 +1321,7 @@ impl PlayerAction {
             }
             PlayerAction::SetFreezeTicks { ticks, ticking_locked_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![ticks.json()],
                     vec![ticking_locked_tag.json()],
                 );
@@ -1342,7 +1336,7 @@ impl PlayerAction {
             }
             PlayerAction::SetGliding { gliding_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![gliding_tag.json()]);
+                let item_args = compile(vec![], vec![gliding_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1354,7 +1348,7 @@ impl PlayerAction {
             }
             PlayerAction::SetRotation { pitch_90_to_90, yaw_180_to_180 } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![pitch_90_to_90.json(), yaw_180_to_180.json()],
                     vec![],
                 );
@@ -1369,7 +1363,7 @@ impl PlayerAction {
             }
             PlayerAction::RemoveScoreboardScore { score_name } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![score_name.json()], vec![]);
+                let item_args = compile(vec![score_name.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1381,7 +1375,7 @@ impl PlayerAction {
             }
             PlayerAction::DisallowDrops {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1397,7 +1391,7 @@ impl PlayerAction {
                 diameter,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![effect.json(), center_location.json(), diameter.json()],
                     vec![],
                 );
@@ -1412,7 +1406,7 @@ impl PlayerAction {
             }
             PlayerAction::ClearItems { items_to_clear } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![items_to_clear.json()], vec![]);
+                let item_args = compile(vec![items_to_clear.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1429,7 +1423,7 @@ impl PlayerAction {
                 block_data,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         block_to_display.json(), block_location.json(), end_of_region
                         .json(), block_data.json()
@@ -1447,7 +1441,7 @@ impl PlayerAction {
             }
             PlayerAction::RideEntity { target_uuid } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![target_uuid.json()], vec![]);
+                let item_args = compile(vec![target_uuid.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1459,7 +1453,7 @@ impl PlayerAction {
             }
             PlayerAction::WeatherRain {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1471,7 +1465,7 @@ impl PlayerAction {
             }
             PlayerAction::SetFlying { flying_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![flying_tag.json()]);
+                let item_args = compile(vec![], vec![flying_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1483,7 +1477,7 @@ impl PlayerAction {
             }
             PlayerAction::RemoveWorldBorder {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1495,7 +1489,7 @@ impl PlayerAction {
             }
             PlayerAction::SendResourcePack { resource_pack_url } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![resource_pack_url.json()], vec![]);
+                let item_args = compile(vec![resource_pack_url.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1510,7 +1504,7 @@ impl PlayerAction {
                 container_state_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![block_location.json()],
                     vec![container_state_tag.json()],
                 );
@@ -1525,7 +1519,7 @@ impl PlayerAction {
             }
             PlayerAction::SetHandItem { hand_slot_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![hand_slot_tag.json()]);
+                let item_args = compile(vec![], vec![hand_slot_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1541,7 +1535,7 @@ impl PlayerAction {
                 toast_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![advancement_name.json(), advancement_icon.json()],
                     vec![toast_type__tag.json()],
                 );
@@ -1560,7 +1554,7 @@ impl PlayerAction {
                 keep_velocity_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![new_position.json()],
                     vec![keep_current_rotation_tag.json(), keep_velocity_tag.json()],
                 );
@@ -1575,7 +1569,7 @@ impl PlayerAction {
             }
             PlayerAction::ClearChat {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1587,7 +1581,7 @@ impl PlayerAction {
             }
             PlayerAction::SetPvPAllowed { pvp_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![pvp_tag.json()]);
+                let item_args = compile(vec![], vec![pvp_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1599,10 +1593,7 @@ impl PlayerAction {
             }
             PlayerAction::SetInventoryMenuItem { slot, item_to_set } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
-                    vec![slot.json(), item_to_set.json()],
-                    vec![],
-                );
+                let item_args = compile(vec![slot.json(), item_to_set.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1619,7 +1610,7 @@ impl PlayerAction {
                 ignore_distance_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![launch_destination.json(), launch_power.json()],
                     vec![add_to_current_velocity_tag.json(), ignore_distance_tag.json()],
                 );
@@ -1634,7 +1625,7 @@ impl PlayerAction {
             }
             PlayerAction::SetArmorItems { armor_to_set } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![armor_to_set.json()], vec![]);
+                let item_args = compile(vec![armor_to_set.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1649,7 +1640,7 @@ impl PlayerAction {
                 animation_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![gateway_location.json()],
                     vec![animation_type__tag.json()],
                 );
@@ -1664,7 +1655,7 @@ impl PlayerAction {
             }
             PlayerAction::DisableFlight {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1676,7 +1667,7 @@ impl PlayerAction {
             }
             PlayerAction::GiveSaturation { saturation_to_give } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![saturation_to_give.json()], vec![]);
+                let item_args = compile(vec![saturation_to_give.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1688,7 +1679,7 @@ impl PlayerAction {
             }
             PlayerAction::SetVisualFire { on_fire_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![on_fire_tag.json()]);
+                let item_args = compile(vec![], vec![on_fire_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1700,7 +1691,7 @@ impl PlayerAction {
             }
             PlayerAction::SetOwnDisguiseVisibility { disguise_visible_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![disguise_visible_tag.json()]);
+                let item_args = compile(vec![], vec![disguise_visible_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1712,7 +1703,7 @@ impl PlayerAction {
             }
             PlayerAction::SetArrowsStuck { arrow_count } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![arrow_count.json()], vec![]);
+                let item_args = compile(vec![arrow_count.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1724,7 +1715,7 @@ impl PlayerAction {
             }
             PlayerAction::GiveExperience { experience_to_give, give_experience_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![experience_to_give.json()],
                     vec![give_experience_tag.json()],
                 );
@@ -1739,7 +1730,7 @@ impl PlayerAction {
             }
             PlayerAction::FaceLocation { location_to_face } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![location_to_face.json()], vec![]);
+                let item_args = compile(vec![location_to_face.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1751,7 +1742,7 @@ impl PlayerAction {
             }
             PlayerAction::ClearScoreboard {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1763,7 +1754,7 @@ impl PlayerAction {
             }
             PlayerAction::SetItems {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1775,7 +1766,7 @@ impl PlayerAction {
             }
             PlayerAction::KeepInv {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1791,7 +1782,7 @@ impl PlayerAction {
                 amount_of_items_to,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         items_to_replace.json(), item_to_replace_with.json(),
                         amount_of_items_to.json()
@@ -1813,7 +1804,7 @@ impl PlayerAction {
                 inherit_styles_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![message_to_send.json()],
                     vec![text_value_merging_tag.json(), inherit_styles_tag.json()],
                 );
@@ -1828,7 +1819,7 @@ impl PlayerAction {
             }
             PlayerAction::SetChatTag { chat_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![chat_tag.json()], vec![]);
+                let item_args = compile(vec![chat_tag.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1845,7 +1836,7 @@ impl PlayerAction {
                 inherit_styles_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![message_to_send.json()],
                     vec![
                         alignment_mode_tag.json(), text_value_merging_tag.json(),
@@ -1863,7 +1854,7 @@ impl PlayerAction {
             }
             PlayerAction::ShiftWorldBorder { new_radius, blocks_per_second } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![new_radius.json(), blocks_per_second.json()],
                     vec![],
                 );
@@ -1878,7 +1869,7 @@ impl PlayerAction {
             }
             PlayerAction::SetIteminSlot { item_to_set, slot_to_set } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![item_to_set.json(), slot_to_set.json()],
                     vec![],
                 );
@@ -1898,7 +1889,7 @@ impl PlayerAction {
                 sound_source_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         sounds_to_play.json(), sound_delay_ticks.json(),
                         playback_location.json()
@@ -1922,7 +1913,7 @@ impl PlayerAction {
                 animation_duration,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         effect.json(), start_location.json(), end_location.json(),
                         effect_spacing.json(), animation_duration.json()
@@ -1946,7 +1937,7 @@ impl PlayerAction {
                 glowing_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![sign_location.json(), text_lines.json()],
                     vec![sign_side_tag.json(), text_color_tag.json(), glowing_tag.json()],
                 );
@@ -1961,7 +1952,7 @@ impl PlayerAction {
             }
             PlayerAction::Respawn {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1973,7 +1964,7 @@ impl PlayerAction {
             }
             PlayerAction::SetMovementSpeed { movement_speed, speed_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![movement_speed.json()],
                     vec![speed_type__tag.json()],
                 );
@@ -1988,7 +1979,7 @@ impl PlayerAction {
             }
             PlayerAction::ExpandInventoryMenu { items_to_display } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![items_to_display.json()], vec![]);
+                let item_args = compile(vec![items_to_display.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2000,7 +1991,7 @@ impl PlayerAction {
             }
             PlayerAction::SetInventoryMenuName { inventory_name } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![inventory_name.json()], vec![]);
+                let item_args = compile(vec![inventory_name.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2018,7 +2009,7 @@ impl PlayerAction {
                 inaccuracy,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         projectile_to.json(), launch_point.json(), projectile_name
                         .json(), speed.json(), inaccuracy.json()
@@ -2039,7 +2030,7 @@ impl PlayerAction {
                 cooldown_in_ticks,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![item_type__to_affect.json(), cooldown_in_ticks.json()],
                     vec![],
                 );
@@ -2054,7 +2045,7 @@ impl PlayerAction {
             }
             PlayerAction::SetPlayerWeather { weather_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![weather_tag.json()]);
+                let item_args = compile(vec![], vec![weather_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2066,7 +2057,7 @@ impl PlayerAction {
             }
             PlayerAction::SendHover {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2078,7 +2069,7 @@ impl PlayerAction {
             }
             PlayerAction::SetVisualShoulderParrot { shoulder_tag, type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![shoulder_tag.json(), type__tag.json()],
                 );
@@ -2093,7 +2084,7 @@ impl PlayerAction {
             }
             PlayerAction::NoProjColl {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2105,7 +2096,7 @@ impl PlayerAction {
             }
             PlayerAction::ShowDisguise {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2117,7 +2108,7 @@ impl PlayerAction {
             }
             PlayerAction::SetRemainingAir { breath_ticks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![breath_ticks.json()], vec![]);
+                let item_args = compile(vec![breath_ticks.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2129,7 +2120,7 @@ impl PlayerAction {
             }
             PlayerAction::DisplayPickUpAnimation { entity_uuid, collector_uuid } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![entity_uuid.json(), collector_uuid.json()],
                     vec![],
                 );
@@ -2151,7 +2142,7 @@ impl PlayerAction {
                 fill_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         effect.json(), corner_1.json(), corner_2.json(), effect_spacing
                         .json(), animation_duration.json()
@@ -2169,7 +2160,7 @@ impl PlayerAction {
             }
             PlayerAction::SetChatColor { new_chat_color } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![new_chat_color.json()], vec![]);
+                let item_args = compile(vec![new_chat_color.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2185,7 +2176,7 @@ impl PlayerAction {
                 warning_distance,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         center_position.json(), radius_in_blocks.json(), warning_distance
                         .json()
@@ -2203,7 +2194,7 @@ impl PlayerAction {
             }
             PlayerAction::SetPlayerTime { daylight_ticks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![daylight_ticks.json()], vec![]);
+                let item_args = compile(vec![daylight_ticks.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2215,7 +2206,7 @@ impl PlayerAction {
             }
             PlayerAction::GiveFood { food_to_give } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![food_to_give.json()], vec![]);
+                let item_args = compile(vec![food_to_give.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2227,7 +2218,7 @@ impl PlayerAction {
             }
             PlayerAction::NatRegen {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2244,7 +2235,7 @@ impl PlayerAction {
                 effect_particles_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![effects.json()],
                     vec![
                         show_icon_tag.json(), overwrite_effect_tag.json(),
@@ -2266,7 +2257,7 @@ impl PlayerAction {
                 sound_source_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![sound_to_play.json(), playback_location.json()],
                     vec![sound_source_tag.json()],
                 );
@@ -2281,7 +2272,7 @@ impl PlayerAction {
             }
             PlayerAction::SetCompassTarget { new_target } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![new_target.json()], vec![]);
+                let item_args = compile(vec![new_target.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2293,7 +2284,7 @@ impl PlayerAction {
             }
             PlayerAction::RemoveItems { items_to_remove } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![items_to_remove.json()], vec![]);
+                let item_args = compile(vec![items_to_remove.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2305,7 +2296,7 @@ impl PlayerAction {
             }
             PlayerAction::BoostElytra { firework } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![firework.json()], vec![]);
+                let item_args = compile(vec![firework.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2320,7 +2311,7 @@ impl PlayerAction {
                 keep_current_rotation_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![locations_to.json()],
                     vec![keep_current_rotation_tag.json()],
                 );
@@ -2335,7 +2326,7 @@ impl PlayerAction {
             }
             PlayerAction::SaveCurrentInventory {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2347,7 +2338,7 @@ impl PlayerAction {
             }
             PlayerAction::OpenBook { book_item } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![book_item.json()], vec![]);
+                let item_args = compile(vec![book_item.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2359,7 +2350,7 @@ impl PlayerAction {
             }
             PlayerAction::SetCurrentHealth { current_health } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![current_health.json()], vec![]);
+                let item_args = compile(vec![current_health.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2371,7 +2362,7 @@ impl PlayerAction {
             }
             PlayerAction::DisguiseasMob { mob_to_disguise_as, display_name } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![mob_to_disguise_as.json(), display_name.json()],
                     vec![],
                 );
@@ -2386,7 +2377,7 @@ impl PlayerAction {
             }
             PlayerAction::DisguiseasBlock { block_to_disguise_as, display_name } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![block_to_disguise_as.json(), display_name.json()],
                     vec![],
                 );
@@ -2401,7 +2392,7 @@ impl PlayerAction {
             }
             PlayerAction::RollBackBlockChanges { rollback_time } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![rollback_time.json()], vec![]);
+                let item_args = compile(vec![rollback_time.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2413,7 +2404,7 @@ impl PlayerAction {
             }
             PlayerAction::NoDeathDrops {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2425,7 +2416,7 @@ impl PlayerAction {
             }
             PlayerAction::AllowPlacingBreakingBlocks { blocks_to_allow } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![blocks_to_allow.json()], vec![]);
+                let item_args = compile(vec![blocks_to_allow.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2437,7 +2428,7 @@ impl PlayerAction {
             }
             PlayerAction::SetWalkSpeed { of_normal } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![of_normal.json()], vec![]);
+                let item_args = compile(vec![of_normal.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2449,7 +2440,7 @@ impl PlayerAction {
             }
             PlayerAction::OpenContainerInventory { container_location } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![container_location.json()], vec![]);
+                let item_args = compile(vec![container_location.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2461,7 +2452,7 @@ impl PlayerAction {
             }
             PlayerAction::SetCollidable { collision_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![collision_tag.json()]);
+                let item_args = compile(vec![], vec![collision_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2477,7 +2468,7 @@ impl PlayerAction {
                 launch_axis_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![launch_power.json()],
                     vec![add_to_current_velocity_tag.json(), launch_axis_tag.json()],
                 );
@@ -2497,7 +2488,7 @@ impl PlayerAction {
                 animation_duration,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         effect.json(), center_location.json(), diameter.json(),
                         animation_duration.json()
@@ -2515,7 +2506,7 @@ impl PlayerAction {
             }
             PlayerAction::RemoveBossBarN { boss_bar_slot_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![boss_bar_slot_tag.json()]);
+                let item_args = compile(vec![], vec![boss_bar_slot_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2527,7 +2518,7 @@ impl PlayerAction {
             }
             PlayerAction::SetFallDistance { fall_distance_blocks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![fall_distance_blocks.json()], vec![]);
+                let item_args = compile(vec![fall_distance_blocks.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2539,7 +2530,7 @@ impl PlayerAction {
             }
             PlayerAction::SettoCreativeMode {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2551,7 +2542,7 @@ impl PlayerAction {
             }
             PlayerAction::SetEquipmentItem { item_to_set, equipment_slot_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![item_to_set.json()],
                     vec![equipment_slot_tag.json()],
                 );
@@ -2566,7 +2557,7 @@ impl PlayerAction {
             }
             PlayerAction::SendPlayerAttackAnimation { animation_arm_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![animation_arm_tag.json()]);
+                let item_args = compile(vec![], vec![animation_arm_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2578,7 +2569,7 @@ impl PlayerAction {
             }
             PlayerAction::GiveRngItem {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2590,7 +2581,7 @@ impl PlayerAction {
             }
             PlayerAction::SetDeathDropsEnabled { spawn_death_drops_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![spawn_death_drops_tag.json()]);
+                let item_args = compile(vec![], vec![spawn_death_drops_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2602,7 +2593,7 @@ impl PlayerAction {
             }
             PlayerAction::RemovePotionEffect { effects } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![effects.json()], vec![]);
+                let item_args = compile(vec![effects.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2614,7 +2605,7 @@ impl PlayerAction {
             }
             PlayerAction::DisplayHologram { display_location, text_to_display } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![display_location.json(), text_to_display.json()],
                     vec![],
                 );
@@ -2633,7 +2624,7 @@ impl PlayerAction {
                 overwrite_previous_fracture_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![blocks_to.json(), fracture_level.json()],
                     vec![overwrite_previous_fracture_tag.json()],
                 );
@@ -2648,7 +2639,7 @@ impl PlayerAction {
             }
             PlayerAction::SetEntityHidden { entity_uuid, hidden_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![entity_uuid.json()],
                     vec![hidden_tag.json()],
                 );
@@ -2663,7 +2654,7 @@ impl PlayerAction {
             }
             PlayerAction::SetSidebarVisible { sidebar_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![sidebar_tag.json()]);
+                let item_args = compile(vec![], vec![sidebar_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2675,7 +2666,7 @@ impl PlayerAction {
             }
             PlayerAction::AllowDrops {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2687,7 +2678,7 @@ impl PlayerAction {
             }
             PlayerAction::DeathDrops {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2703,7 +2694,7 @@ impl PlayerAction {
                 arrival_time,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         origin_location.json(), target_location.json(), arrival_time
                         .json()
@@ -2721,7 +2712,7 @@ impl PlayerAction {
             }
             PlayerAction::ShowInventoryMenu { items_to_display } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![items_to_display.json()], vec![]);
+                let item_args = compile(vec![items_to_display.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2733,7 +2724,7 @@ impl PlayerAction {
             }
             PlayerAction::SetHotbarSlot { new_slot } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![new_slot.json()], vec![]);
+                let item_args = compile(vec![new_slot.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2750,7 +2741,7 @@ impl PlayerAction {
                 effect_spacing,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         effect.json(), ray_location.json(), ray_vector.json(),
                         effect_spacing.json()
@@ -2768,7 +2759,7 @@ impl PlayerAction {
             }
             PlayerAction::SetFoodLevel { food_level } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![food_level.json()], vec![]);
+                let item_args = compile(vec![food_level.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2783,7 +2774,7 @@ impl PlayerAction {
                 display_skin,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![player_name_to_disguise_as.json(), display_skin.json()],
                     vec![],
                 );
@@ -2804,7 +2795,7 @@ impl PlayerAction {
                 fill_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         effect.json(), corner_1.json(), corner_2.json(), effect_spacing
                         .json()
@@ -2826,7 +2817,7 @@ impl PlayerAction {
                 alignment_mode_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![messages_to_send.json(), message_delay_ticks.json()],
                     vec![alignment_mode_tag.json()],
                 );
@@ -2841,7 +2832,7 @@ impl PlayerAction {
             }
             PlayerAction::SetNamePrefixSuffix { prefixsuffix_text, text_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![prefixsuffix_text.json()],
                     vec![text_type__tag.json()],
                 );
@@ -2856,7 +2847,7 @@ impl PlayerAction {
             }
             PlayerAction::SetSaturationLevel { saturation_level } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![saturation_level.json()], vec![]);
+                let item_args = compile(vec![saturation_level.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2868,7 +2859,7 @@ impl PlayerAction {
             }
             PlayerAction::WeatherClear {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2880,7 +2871,7 @@ impl PlayerAction {
             }
             PlayerAction::SetRainLevel { rain_level_, storm_level_ } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![rain_level_.json(), storm_level_.json()],
                     vec![],
                 );
@@ -2895,7 +2886,7 @@ impl PlayerAction {
             }
             PlayerAction::Undisguise {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2915,7 +2906,7 @@ impl PlayerAction {
                 animation_duration,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         effect.json(), base_location.json(), length.json(), diameter
                         .json(), particle_count.json(), rotations.json(),
@@ -2940,7 +2931,7 @@ impl PlayerAction {
                 fade_out_length,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         title_text.json(), subtitle_text.json(), title_duration.json(),
                         fade_in_length.json(), fade_out_length.json()
@@ -2958,7 +2949,7 @@ impl PlayerAction {
             }
             PlayerAction::SetInstantRespawn { instant_respawn_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![instant_respawn_tag.json()]);
+                let item_args = compile(vec![], vec![instant_respawn_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2970,7 +2961,7 @@ impl PlayerAction {
             }
             PlayerAction::SetScoreboardScore { score_name, score_value } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![score_name.json(), score_value.json()],
                     vec![],
                 );
@@ -2985,7 +2976,7 @@ impl PlayerAction {
             }
             PlayerAction::StopSounds { sounds_to_stop, sound_source_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![sounds_to_stop.json()],
                     vec![sound_source_tag.json()],
                 );
@@ -3000,7 +2991,7 @@ impl PlayerAction {
             }
             PlayerAction::SetNameColor { name_color_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![name_color_tag.json()]);
+                let item_args = compile(vec![], vec![name_color_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -3017,7 +3008,7 @@ impl PlayerAction {
                 effect_spacing,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         effect.json(), start_location.json(), end_location.json(),
                         effect_spacing.json()

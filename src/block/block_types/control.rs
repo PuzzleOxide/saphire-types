@@ -15,7 +15,7 @@ impl Control {
         match self {
             Control::StopRepeat {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -27,7 +27,7 @@ impl Control {
             }
             Control::ReturnFromFunction {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -39,7 +39,7 @@ impl Control {
             }
             Control::ReturnNTimes {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -51,7 +51,7 @@ impl Control {
             }
             Control::SkipIteration {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -63,7 +63,7 @@ impl Control {
             }
             Control::EndThread {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -75,7 +75,7 @@ impl Control {
             }
             Control::Wait { wait_duration, time_unit_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![wait_duration.json()],
                     vec![time_unit_tag.json()],
                 );

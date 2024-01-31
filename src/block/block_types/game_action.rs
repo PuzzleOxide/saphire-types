@@ -233,7 +233,7 @@ impl GameAction {
         match self {
             GameAction::StartLoop {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -245,7 +245,7 @@ impl GameAction {
             }
             GameAction::SetFurnaceCookTime { furnace_location, ticks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![furnace_location.json(), ticks.json()],
                     vec![],
                 );
@@ -260,7 +260,7 @@ impl GameAction {
             }
             GameAction::EnableBlockDrops {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -272,7 +272,7 @@ impl GameAction {
             }
             GameAction::FillContainer { container_location, items_to_fill_with } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![container_location.json(), items_to_fill_with.json()],
                     vec![],
                 );
@@ -287,7 +287,7 @@ impl GameAction {
             }
             GameAction::BreakBlock { blocks_to_break } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![blocks_to_break.json()], vec![]);
+                let item_args = compile(vec![blocks_to_break.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -299,7 +299,7 @@ impl GameAction {
             }
             GameAction::LPFXSpiral {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -311,7 +311,7 @@ impl GameAction {
             }
             GameAction::ParticleSphere {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -327,7 +327,7 @@ impl GameAction {
                 show_particles_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![blocks_to_bone_meal.json(), number_of_uses.json()],
                     vec![show_particles_tag.json()],
                 );
@@ -342,7 +342,7 @@ impl GameAction {
             }
             GameAction::DebugStackTrace {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -360,7 +360,7 @@ impl GameAction {
                 reform_on_impact_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         block_location.json(), block_material.json(), block_data.json()
                     ],
@@ -377,7 +377,7 @@ impl GameAction {
             }
             GameAction::SendDiscordWebhookMessage { webhook_url, message_content } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![webhook_url.json(), message_content.json()],
                     vec![],
                 );
@@ -397,7 +397,7 @@ impl GameAction {
                 sign_side_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![sign_location.json(), line_number.json(), new_text.json()],
                     vec![sign_side_tag.json()],
                 );
@@ -412,7 +412,7 @@ impl GameAction {
             }
             GameAction::RandomTickBlock { blocks_to_tick, number_of_ticks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![blocks_to_tick.json(), number_of_ticks.json()],
                     vec![],
                 );
@@ -432,7 +432,7 @@ impl GameAction {
                 content_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![url_to_request.json(), content_body.json()],
                     vec![request_method_tag.json(), content_type__tag.json()],
                 );
@@ -447,7 +447,7 @@ impl GameAction {
             }
             GameAction::ClearScBoard {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -459,7 +459,7 @@ impl GameAction {
             }
             GameAction::HideSidebar {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -476,7 +476,7 @@ impl GameAction {
                 amount_of_items_to,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         container_location.json(), items_to_replace.json(),
                         item_to_replace_with.json(), amount_of_items_to.json()
@@ -494,7 +494,7 @@ impl GameAction {
             }
             GameAction::SetEventProjectile { projectile_to_launch } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![projectile_to_launch.json()], vec![]);
+                let item_args = compile(vec![projectile_to_launch.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -506,7 +506,7 @@ impl GameAction {
             }
             GameAction::SpawnItemDisplay {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -518,7 +518,7 @@ impl GameAction {
             }
             GameAction::CreateExplosion { explosion, explosion_power_c07c47 } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![explosion.json(), explosion_power_c07c47.json()],
                     vec![],
                 );
@@ -540,7 +540,7 @@ impl GameAction {
                 equipment,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         mob_type_.json(), spawn_location.json(), health.json(),
                         custom_name.json(), effects.json(), equipment.json()
@@ -558,7 +558,7 @@ impl GameAction {
             }
             GameAction::SetIteminBrushableBlock { block_location, item } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![block_location.json(), item.json()],
                     vec![],
                 );
@@ -573,7 +573,7 @@ impl GameAction {
             }
             GameAction::ParticleLineA {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -591,7 +591,7 @@ impl GameAction {
                 end_of_lifespan_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         location_to_spawn_at.json(), destination.json(), lifespan_ticks
                         .json(), custom_name.json()
@@ -609,7 +609,7 @@ impl GameAction {
             }
             GameAction::ShowSidebar {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -626,7 +626,7 @@ impl GameAction {
                 duration_ticks,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         spawn_location.json(), effect_to_apply.json(), radius_blocks
                         .json(), duration_ticks.json()
@@ -644,7 +644,7 @@ impl GameAction {
             }
             GameAction::ParticleSpiral {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -660,7 +660,7 @@ impl GameAction {
                 overwrite_existing_data_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![location.json(), block_data.json()],
                     vec![overwrite_existing_data_tag.json()],
                 );
@@ -681,7 +681,7 @@ impl GameAction {
                 inaccuracy,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         projectile_to_launch.json(), launch_point.json(), custom_name
                         .json(), speed.json(), inaccuracy.json()
@@ -704,7 +704,7 @@ impl GameAction {
                 movement_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![firework_rocket.json(), spawn_location.json()],
                     vec![instant_tag.json(), movement_tag.json()],
                 );
@@ -719,7 +719,7 @@ impl GameAction {
             }
             GameAction::SetBlock { block_to_set, block_locations, block_data } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![block_to_set.json(), block_locations.json(), block_data.json()],
                     vec![],
                 );
@@ -734,7 +734,7 @@ impl GameAction {
             }
             GameAction::SpawnItemDisp { spawn_location, displayed_item } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![spawn_location.json(), displayed_item.json()],
                     vec![],
                 );
@@ -749,7 +749,7 @@ impl GameAction {
             }
             GameAction::SetEventDamage { new_damage_amount } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![new_damage_amount.json()], vec![]);
+                let item_args = compile(vec![new_damage_amount.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -765,7 +765,7 @@ impl GameAction {
                 growth_unit_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![block_location.json(), growth_stage.json()],
                     vec![growth_unit_tag.json()],
                 );
@@ -780,7 +780,7 @@ impl GameAction {
             }
             GameAction::Wait { delay_unit_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![delay_unit_tag.json()]);
+                let item_args = compile(vec![], vec![delay_unit_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -792,7 +792,7 @@ impl GameAction {
             }
             GameAction::SetContainerName { container_location, name } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![container_location.json(), name.json()],
                     vec![],
                 );
@@ -812,7 +812,7 @@ impl GameAction {
                 apply_item_motion_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         items_to_spawn.json(), spawn_location.json(), custom_name.json()
                     ],
@@ -834,7 +834,7 @@ impl GameAction {
                 glowing_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![sign_location.json()],
                     vec![sign_side_tag.json(), text_color_tag.json(), glowing_tag.json()],
                 );
@@ -849,10 +849,7 @@ impl GameAction {
             }
             GameAction::SetPlayerHead { head_location, head } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
-                    vec![head_location.json(), head.json()],
-                    vec![],
-                );
+                let item_args = compile(vec![head_location.json(), head.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -864,7 +861,7 @@ impl GameAction {
             }
             GameAction::RemoveHologram {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -876,7 +873,7 @@ impl GameAction {
             }
             GameAction::RemoveContainerItems { container_location, items_to_remove } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![container_location.json(), items_to_remove.json()],
                     vec![],
                 );
@@ -891,7 +888,7 @@ impl GameAction {
             }
             GameAction::SpawnShulkerBullet { spawn_location } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![spawn_location.json()], vec![]);
+                let item_args = compile(vec![spawn_location.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -903,7 +900,7 @@ impl GameAction {
             }
             GameAction::SpawnRngItem { apply_item_motion_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![apply_item_motion_tag.json()]);
+                let item_args = compile(vec![], vec![apply_item_motion_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -915,7 +912,7 @@ impl GameAction {
             }
             GameAction::FireworkEffect {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -927,7 +924,7 @@ impl GameAction {
             }
             GameAction::SetRegion { block_to_set, corner_1, corner_2, block_data } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         block_to_set.json(), corner_1.json(), corner_2.json(), block_data
                         .json()
@@ -945,7 +942,7 @@ impl GameAction {
             }
             GameAction::SetContainerContents { container_location, items_to_set } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![container_location.json(), items_to_set.json()],
                     vec![],
                 );
@@ -965,7 +962,7 @@ impl GameAction {
                 responsive_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         spawn_location.json(), hitbox_width.json(), hitbox_height.json()
                     ],
@@ -986,7 +983,7 @@ impl GameAction {
                 slot,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![container_location.json(), item_to_set.json(), slot.json()],
                     vec![],
                 );
@@ -1001,7 +998,7 @@ impl GameAction {
             }
             GameAction::ParticleCircleA {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1020,7 +1017,7 @@ impl GameAction {
                 clone_block_entities_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         corner_1.json(), corner_2.json(), position_to_copy_from.json(),
                         position_to_paste_to.json()
@@ -1038,7 +1035,7 @@ impl GameAction {
             }
             GameAction::UncancelEvent {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1054,7 +1051,7 @@ impl GameAction {
                 displayed_page,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         lectern_location.json(), book_to_put.json(), displayed_page
                         .json()
@@ -1077,7 +1074,7 @@ impl GameAction {
                 custom_name,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         spawn_location.json(), tnt_power_c07c47.json(), fuse_duration
                         .json(), custom_name.json()
@@ -1100,7 +1097,7 @@ impl GameAction {
                 visibility_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![spawn_location.json(), custom_name.json(), equipment.json()],
                     vec![visibility_tag.json()],
                 );
@@ -1119,7 +1116,7 @@ impl GameAction {
                 custom_name,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         spawn_location.json(), experience_amount.json(), custom_name
                         .json()
@@ -1137,7 +1134,7 @@ impl GameAction {
             }
             GameAction::SetEventHealAmount { new_healing_amount } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![new_healing_amount.json()], vec![]);
+                let item_args = compile(vec![new_healing_amount.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1149,7 +1146,7 @@ impl GameAction {
             }
             GameAction::PFXPath {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1165,7 +1162,7 @@ impl GameAction {
                 block_data,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         spawn_location.json(), displayed_block.json(), block_data.json()
                     ],
@@ -1182,7 +1179,7 @@ impl GameAction {
             }
             GameAction::ParticleRay {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1194,7 +1191,7 @@ impl GameAction {
             }
             GameAction::GenerateTree { tree_location_bottom, tree_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![tree_location_bottom.json()],
                     vec![tree_type__tag.json()],
                 );
@@ -1209,7 +1206,7 @@ impl GameAction {
             }
             GameAction::StopLoop {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1221,7 +1218,7 @@ impl GameAction {
             }
             GameAction::ClearContainer { container_location } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![container_location.json()], vec![]);
+                let item_args = compile(vec![container_location.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1233,7 +1230,7 @@ impl GameAction {
             }
             GameAction::SetScObj {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1245,7 +1242,7 @@ impl GameAction {
             }
             GameAction::CancelEvent {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1261,7 +1258,7 @@ impl GameAction {
                 show_bottom_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![spawn_location.json(), custom_name.json()],
                     vec![show_bottom_tag.json()],
                 );
@@ -1276,7 +1273,7 @@ impl GameAction {
             }
             GameAction::ParticleEffect {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1288,7 +1285,7 @@ impl GameAction {
             }
             GameAction::SpawnEvokerFangs { spawn_location, custom_name } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![spawn_location.json(), custom_name.json()],
                     vec![],
                 );
@@ -1303,7 +1300,7 @@ impl GameAction {
             }
             GameAction::SetEventSound { new_sound } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![new_sound.json()], vec![]);
+                let item_args = compile(vec![new_sound.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1320,7 +1317,7 @@ impl GameAction {
                 campfire_slot_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         campfire_location.json(), campfire_item.json(),
                         cooking_time_ticks.json()
@@ -1343,7 +1340,7 @@ impl GameAction {
                 inherit_styles_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![spawn_location.json(), displayed_text.json()],
                     vec![text_value_merging_tag.json(), inherit_styles_tag.json()],
                 );
@@ -1358,7 +1355,7 @@ impl GameAction {
             }
             GameAction::SetEventExperience { experience } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![experience.json()], vec![]);
+                let item_args = compile(vec![experience.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1370,7 +1367,7 @@ impl GameAction {
             }
             GameAction::SetContainerLock { container_location, lock_key } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![container_location.json(), lock_key.json()],
                     vec![],
                 );
@@ -1385,7 +1382,7 @@ impl GameAction {
             }
             GameAction::SpawnVehicle { vehicle_type_, spawn_location, custom_name } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         vehicle_type_.json(), spawn_location.json(), custom_name.json()
                     ],
@@ -1402,7 +1399,7 @@ impl GameAction {
             }
             GameAction::SummonLightning { impact_location } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![impact_location.json()], vec![]);
+                let item_args = compile(vec![impact_location.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1414,7 +1411,7 @@ impl GameAction {
             }
             GameAction::ParticleSpiralA {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1426,7 +1423,7 @@ impl GameAction {
             }
             GameAction::RemoveScore {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1438,7 +1435,7 @@ impl GameAction {
             }
             GameAction::CreateHologram {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1450,7 +1447,7 @@ impl GameAction {
             }
             GameAction::SetScore {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1462,7 +1459,7 @@ impl GameAction {
             }
             GameAction::ParticleCluster {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1474,7 +1471,7 @@ impl GameAction {
             }
             GameAction::ParticleCircle {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1486,7 +1483,7 @@ impl GameAction {
             }
             GameAction::DisableBlockDrops {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1498,7 +1495,7 @@ impl GameAction {
             }
             GameAction::PFXLineA {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1510,7 +1507,7 @@ impl GameAction {
             }
             GameAction::ClearContainerItems { container_location, items_to_clear } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![container_location.json(), items_to_clear.json()],
                     vec![],
                 );
@@ -1525,7 +1522,7 @@ impl GameAction {
             }
             GameAction::ParticleLine {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(

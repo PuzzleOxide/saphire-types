@@ -77,7 +77,7 @@ impl IfPlayer {
                 fluid_mode_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![block_to_check_for.json(), maximum_distance_from.json()],
                     vec![fluid_mode_tag.json()],
                 );
@@ -92,7 +92,7 @@ impl IfPlayer {
             }
             IfPlayer::IsInWorldBorder { location_to_check } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![location_to_check.json()], vec![]);
+                let item_args = compile(vec![location_to_check.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -108,7 +108,7 @@ impl IfPlayer {
                 checked_slots_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![items_to_check_with.json()],
                     vec![check_mode_tag.json(), checked_slots_tag.json()],
                 );
@@ -123,7 +123,7 @@ impl IfPlayer {
             }
             IfPlayer::IsHoldingOff {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -135,7 +135,7 @@ impl IfPlayer {
             }
             IfPlayer::IsUsingResourcePack {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -147,7 +147,7 @@ impl IfPlayer {
             }
             IfPlayer::ItemIsNotOnCooldown { item_type_s_to_check } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![item_type_s_to_check.json()], vec![]);
+                let item_args = compile(vec![item_type_s_to_check.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -159,7 +159,7 @@ impl IfPlayer {
             }
             IfPlayer::IsUsingItem { items_to_check } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![items_to_check.json()], vec![]);
+                let item_args = compile(vec![items_to_check.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -171,7 +171,7 @@ impl IfPlayer {
             }
             IfPlayer::HasAllItems {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -183,7 +183,7 @@ impl IfPlayer {
             }
             IfPlayer::IsSwimming {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -195,7 +195,7 @@ impl IfPlayer {
             }
             IfPlayer::HasItem { items_to_check_for, check_mode_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![items_to_check_for.json()],
                     vec![check_mode_tag.json()],
                 );
@@ -210,7 +210,7 @@ impl IfPlayer {
             }
             IfPlayer::BlockEquals {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -222,7 +222,7 @@ impl IfPlayer {
             }
             IfPlayer::IsWearingItem { items_to_check_for, check_mode_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![items_to_check_for.json()],
                     vec![check_mode_tag.json()],
                 );
@@ -237,7 +237,7 @@ impl IfPlayer {
             }
             IfPlayer::IsNearLocation { center_location, radius, shape_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![center_location.json(), radius.json()],
                     vec![shape_tag.json()],
                 );
@@ -252,7 +252,7 @@ impl IfPlayer {
             }
             IfPlayer::IsRiding { compare_text_to_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![compare_text_to_tag.json()]);
+                let item_args = compile(vec![], vec![compare_text_to_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -264,7 +264,7 @@ impl IfPlayer {
             }
             IfPlayer::StandingOn {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -276,7 +276,7 @@ impl IfPlayer {
             }
             IfPlayer::CmdEquals { check_mode_tag, ignore_case_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![check_mode_tag.json(), ignore_case_tag.json()],
                 );
@@ -291,7 +291,7 @@ impl IfPlayer {
             }
             IfPlayer::IsStandingonBlock { block_to_check_for } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![block_to_check_for.json()], vec![]);
+                let item_args = compile(vec![block_to_check_for.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -303,7 +303,7 @@ impl IfPlayer {
             }
             IfPlayer::IsGrounded {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -315,7 +315,7 @@ impl IfPlayer {
             }
             IfPlayer::CursorItemEquals { itemss_to_check_for } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![itemss_to_check_for.json()], vec![]);
+                let item_args = compile(vec![itemss_to_check_for.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -327,7 +327,7 @@ impl IfPlayer {
             }
             IfPlayer::HotbarSlotEquals { slot_id_to_check } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![slot_id_to_check.json()], vec![]);
+                let item_args = compile(vec![slot_id_to_check.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -339,7 +339,7 @@ impl IfPlayer {
             }
             IfPlayer::ItemEquals {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -351,7 +351,7 @@ impl IfPlayer {
             }
             IfPlayer::IsHoldingMain {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -363,7 +363,7 @@ impl IfPlayer {
             }
             IfPlayer::IsHoldingItem { items_to_check_for, hand_slot_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![items_to_check_for.json()],
                     vec![hand_slot_tag.json()],
                 );
@@ -378,7 +378,7 @@ impl IfPlayer {
             }
             IfPlayer::InventoryMenuSlotEquals { slots_to_check, items_to_check_for } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![slots_to_check.json(), items_to_check_for.json()],
                     vec![],
                 );
@@ -393,7 +393,7 @@ impl IfPlayer {
             }
             IfPlayer::IsBlocking {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -405,7 +405,7 @@ impl IfPlayer {
             }
             IfPlayer::HasPlotPermission { permission_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![permission_tag.json()]);
+                let item_args = compile(vec![], vec![permission_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -417,7 +417,7 @@ impl IfPlayer {
             }
             IfPlayer::IsRidingEntity { spawn_egg } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![spawn_egg.json()], vec![]);
+                let item_args = compile(vec![spawn_egg.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -429,7 +429,7 @@ impl IfPlayer {
             }
             IfPlayer::IsSneaking {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -441,7 +441,7 @@ impl IfPlayer {
             }
             IfPlayer::IsFlying {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -457,7 +457,7 @@ impl IfPlayer {
                 check_mode_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![effects.json()],
                     vec![check_properties_tag.json(), check_mode_tag.json()],
                 );
@@ -472,7 +472,7 @@ impl IfPlayer {
             }
             IfPlayer::NameEquals { names_to_check_for } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![names_to_check_for.json()], vec![]);
+                let item_args = compile(vec![names_to_check_for.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -484,7 +484,7 @@ impl IfPlayer {
             }
             IfPlayer::InventoryTypeOpen { inventory_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![inventory_type__tag.json()]);
+                let item_args = compile(vec![], vec![inventory_type__tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -496,7 +496,7 @@ impl IfPlayer {
             }
             IfPlayer::HasIteminSlot { slots_to_check, items_to_check_for } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![slots_to_check.json(), items_to_check_for.json()],
                     vec![],
                 );
@@ -511,7 +511,7 @@ impl IfPlayer {
             }
             IfPlayer::IsSprinting {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -523,7 +523,7 @@ impl IfPlayer {
             }
             IfPlayer::IsGliding {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -535,7 +535,7 @@ impl IfPlayer {
             }
             IfPlayer::CmdArgEquals { ignore_case_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![ignore_case_tag.json()]);
+                let item_args = compile(vec![], vec![ignore_case_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(

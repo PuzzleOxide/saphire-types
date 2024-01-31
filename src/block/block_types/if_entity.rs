@@ -33,7 +33,7 @@ impl IfEntity {
         match self {
             IfEntity::IsVehicle {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -45,7 +45,7 @@ impl IfEntity {
             }
             IfEntity::IsGrounded {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -57,7 +57,7 @@ impl IfEntity {
             }
             IfEntity::IsType { spawn_egg } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![spawn_egg.json()], vec![]);
+                let item_args = compile(vec![spawn_egg.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -69,7 +69,7 @@ impl IfEntity {
             }
             IfEntity::IsProjectile {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -81,7 +81,7 @@ impl IfEntity {
             }
             IfEntity::IsMob {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -93,10 +93,7 @@ impl IfEntity {
             }
             IfEntity::HasCustomTag { tag_name, tag_value } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
-                    vec![tag_name.json(), tag_value.json()],
-                    vec![],
-                );
+                let item_args = compile(vec![tag_name.json(), tag_value.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -108,7 +105,7 @@ impl IfEntity {
             }
             IfEntity::IsSheared {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -120,7 +117,7 @@ impl IfEntity {
             }
             IfEntity::IsItem {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -132,7 +129,7 @@ impl IfEntity {
             }
             IfEntity::IsRidingEntity { spawn_egg } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![spawn_egg.json()], vec![]);
+                let item_args = compile(vec![spawn_egg.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -144,7 +141,7 @@ impl IfEntity {
             }
             IfEntity::Exists {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -156,7 +153,7 @@ impl IfEntity {
             }
             IfEntity::IsNearLocation { center_location, range, shape_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![center_location.json(), range.json()],
                     vec![shape_tag.json()],
                 );
@@ -175,7 +172,7 @@ impl IfEntity {
                 check_mode_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![effects.json()],
                     vec![check_properties_tag.json(), check_mode_tag.json()],
                 );
@@ -190,7 +187,7 @@ impl IfEntity {
             }
             IfEntity::IsRiding { compare_text_to_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![compare_text_to_tag.json()]);
+                let item_args = compile(vec![], vec![compare_text_to_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -202,7 +199,7 @@ impl IfEntity {
             }
             IfEntity::StandingOn {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -214,7 +211,7 @@ impl IfEntity {
             }
             IfEntity::NameEquals { name_to_check_for } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![name_to_check_for.json()], vec![]);
+                let item_args = compile(vec![name_to_check_for.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -226,7 +223,7 @@ impl IfEntity {
             }
             IfEntity::IsStandingonBlock { block_to_check_for } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![block_to_check_for.json()], vec![]);
+                let item_args = compile(vec![block_to_check_for.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(

@@ -4,12 +4,12 @@ use crate::types::*;
 use crate::block::block_types::subactions::*;
 pub enum SetVariable {
     SettoString {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         string_to_set_to: Vec<AnyType>,
         text_value_merging_tag: TextValueMergingSettoString,
     },
     SetParticleEffectType {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         effect_to: Option<Particle>,
         type_: Text,
     },
@@ -20,92 +20,104 @@ pub enum SetVariable {
         ignore_case_tag: IgnoreCasePurgeMatchingVariables,
     },
     ShiftLocationonAllAxes {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location_to_change: Option<Location>,
         x_change: Option<Number>,
         y_change: Option<Number>,
         z_change: Option<Number>,
     },
-    GetParticleEffectMaterial { variable_to_set: Variable, effect_to_get: Particle },
+    GetParticleEffectMaterial {
+        variable_to_set: VariableLiteral,
+        effect_to_get: Particle,
+    },
     SetParticleEffectSpread {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         effect_to_change: Option<Particle>,
         horizontal_spread: Number,
         vertical_spread: Number,
     },
-    SettoAbsoluteValue { variable_to_set: Variable, number_input: Option<Number> },
-    AppendValuetoList { list_to_append_to: Variable, values_to_append: Vec<AnyType> },
+    SettoAbsoluteValue {
+        variable_to_set: VariableLiteral,
+        number_input: Option<Number>,
+    },
+    AppendValuetoList {
+        list_to_append_to: VariableLiteral,
+        values_to_append: Vec<AnyType>,
+    },
     SettoRemainder {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         dividend: Number,
         divisor: Number,
         remainder_mode_tag: RemainderModeSettoRemainder,
     },
     ShiftLocationonVector {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location_to_shift: Option<Location>,
         shift_vector: Vector,
         shift_distance: Option<Number>,
         add_location_rotation_tag: AddLocationRotationShiftLocationonVector,
     },
     GetItemAttribute {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item: Item,
         attribute_tag: AttributeGetItemAttribute,
         active_equipment_slot_tag: ActiveEquipmentSlotGetItemAttribute,
     },
-    ClearDictionary { dictionary_to_clear: Variable },
-    AddNumbers { variable_to_set: Variable, numbers_to_add: Vec<Number> },
+    ClearDictionary { dictionary_to_clear: VariableLiteral },
+    AddNumbers { variable_to_set: VariableLiteral, numbers_to_add: Vec<Number> },
     ShiftLocationRotation {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location_to_shift: Option<Location>,
         rotation_amount: Number,
         rotation_axis_tag: RotationAxisShiftLocationRotation,
     },
-    SubtractNumbers { variable_to_set: Variable, numbers_to_subtract: Vec<Number> },
-    GetItemName { variable_to_set: Variable, item_to_get_name_of: Item },
-    GetItemRarity { variable_to_set: Variable, item: Item },
+    SubtractNumbers {
+        variable_to_set: VariableLiteral,
+        numbers_to_subtract: Vec<Number>,
+    },
+    GetItemName { variable_to_set: VariableLiteral, item_to_get_name_of: Item },
+    GetItemRarity { variable_to_set: VariableLiteral, item: Item },
     MultiplyVector {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         vector_to_multiply: Option<Vector>,
         multiplier: Number,
     },
     DivideNumbers {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         numbers_to_divide: Vec<Number>,
         division_mode_tag: DivisionModeDivideNumbers,
     },
     GetSignText { sign_line_tag: SignLineGetSignText },
     SettoBitwiseOperation {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         operand_1: Number,
         operand_2: Option<Number>,
         operator_tag: OperatorSettoBitwiseOperation,
     },
-    GetLecternPage { variable_to_set: Variable, lectern_location: Location },
+    GetLecternPage { variable_to_set: VariableLiteral, lectern_location: Location },
     ParseX {},
     ShiftLocationonAxis {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location_to_shift: Option<Location>,
         shift_distance: Number,
         coordinate_tag: CoordinateShiftLocationonAxis,
     },
     ParseY {},
     SettoVectorBetweenLocations {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         start_location: Location,
         end_location: Location,
     },
     ParseZ {},
     GetVectorComponent {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         vector_to_get: Vector,
         component_tag: ComponentGetVectorComponent,
     },
-    SettoValueEq { variable_to_set: Variable, value: AnyType },
+    SettoValueEq { variable_to_set: VariableLiteral, value: AnyType },
     RmText { regular_expressions_tag: RegularExpressionsRmText },
     AddItemAttribute {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item: Option<Item>,
         modifier_amount: Number,
         attribute_tag: AttributeAddItemAttribute,
@@ -113,173 +125,201 @@ pub enum SetVariable {
         active_equipment_slot_tag: ActiveEquipmentSlotAddItemAttribute,
     },
     SettoCenterLocation {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         locations_to_center: Vec<Location>,
     },
     AlignLocation {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location_to_align: Option<Location>,
         alignment_mode_tag: AlignmentModeAlignLocation,
         coordinates_tag: CoordinatesAlignLocation,
         rotation_tag: RotationAlignLocation,
     },
-    GetSoundVolume { variable_to_set: Variable, sound_to_get_volume_of: Sound },
+    GetSoundVolume { variable_to_set: VariableLiteral, sound_to_get_volume_of: Sound },
     SettoRandomNumber {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         minimum_number: Number,
         maximum_number: Number,
         rounding_mode_tag: RoundingModeSettoRandomNumber,
     },
-    GetContainerName { variable_to_set: Variable, container_location: Location },
+    GetContainerName { variable_to_set: VariableLiteral, container_location: Location },
     RaycastfromLocation {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         ray_origin: Location,
         ray_distance: Number,
         entity_collision_tag: EntityCollisionRaycastfromLocation,
         block_collision_tag: BlockCollisionRaycastfromLocation,
     },
     RotateVectorAroundVector {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         vector_to_rotate: Option<Vector>,
         axis_vector: Vector,
         angle: Number,
         angle_units_tag: AngleUnitsRotateVectorAroundVector,
     },
-    GetParticleEffectMotion { variable_to_set: Variable, effect_to_get: Particle },
+    GetParticleEffectMotion {
+        variable_to_set: VariableLiteral,
+        effect_to_get: Particle,
+    },
     SetParticleMotion {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         effect_to: Option<Particle>,
         particle_motion: Option<Vector>,
         motion_variation_: Option<Number>,
     },
-    SettoAverageNumber { variable_to_set: Variable, numbers_to_average: Vec<Number> },
+    SettoAverageNumber {
+        variable_to_set: VariableLiteral,
+        numbers_to_average: Vec<Number>,
+    },
     WrapNumberOld {},
     SetY {},
     SetMapTexture {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         image_url: Text,
     },
-    GetBlockData { variable_to_set: Variable, block_location: Location, tag_name: Text },
+    GetBlockData {
+        variable_to_set: VariableLiteral,
+        block_location: Location,
+        tag_name: Text,
+    },
     SetX {},
     SortDictionary {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         dictionary_to_sort: Option<Dict>,
         sorting_type__tag: SortingTypeSortDictionary,
         sorting_order_tag: SortingOrderSortDictionary,
     },
-    GetLecternBook { variable_to_set: Variable, lectern_location: Location },
-    GetCustomSoundKey { variable_to_set: Variable, sound_to_get_key_of: Sound },
-    SettoCrossProduct { variable_to_set: Variable, vector_1: Vector, vector_2: Vector },
-    MultiplyNumbers { variable_to_set: Variable, numbers_to_multiply: Vec<Number> },
-    GetParticleRoll { variable_to_set: Variable, effect_to_get: Option<Particle> },
+    GetLecternBook { variable_to_set: VariableLiteral, lectern_location: Location },
+    GetCustomSoundKey { variable_to_set: VariableLiteral, sound_to_get_key_of: Sound },
+    SettoCrossProduct {
+        variable_to_set: VariableLiteral,
+        vector_1: Vector,
+        vector_2: Vector,
+    },
+    MultiplyNumbers {
+        variable_to_set: VariableLiteral,
+        numbers_to_multiply: Vec<Number>,
+    },
+    GetParticleRoll {
+        variable_to_set: VariableLiteral,
+        effect_to_get: Option<Particle>,
+    },
     ParseYaw {},
-    SettoDotProduct { variable_to_set: Variable, vector_1: Vector, vector_2: Vector },
+    SettoDotProduct {
+        variable_to_set: VariableLiteral,
+        vector_1: Vector,
+        vector_2: Vector,
+    },
     SetZ {},
     SetArmorTrim {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         trim_pattern_tag: TrimPatternSetArmorTrim,
         trim_material_tag: TrimMaterialSetArmorTrim,
     },
     PopListValue {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         list_to_get_value_of: List,
         index: Option<Number>,
     },
-    SettoMinimumNumber { variable_to_set: Variable, number_set: Vec<Number> },
-    GetPotionEffectType { variable_to_set: Variable, potion_to_get: Potion },
+    SettoMinimumNumber { variable_to_set: VariableLiteral, number_set: Vec<Number> },
+    GetPotionEffectType { variable_to_set: VariableLiteral, potion_to_get: Potion },
     SetItemName {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         name: Vec<MiniMessage>,
     },
-    GetListLength { variable_to_set: Variable, list_to_measure: List },
+    GetListLength { variable_to_set: VariableLiteral, list_to_measure: List },
     SettoSine {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         number_input: Number,
         sine_variant_tag: SineVariantSettoSine,
         input_tag: InputSettoSine,
     },
-    SettoDirectionName { variable_to_set: Variable, direction: Vector },
+    SettoDirectionName { variable_to_set: VariableLiteral, direction: Vector },
     RepeatString {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         string_to_repeat: Text,
         times_to_repeat: Number,
     },
     GetItemLore {},
     JoinString {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         strings_to_join: List,
         joining_string: Option<Text>,
         final_joining_string: Option<Text>,
     },
-    ReverseList { variable_to_set: Variable, list_to_reverse: Option<List> },
+    ReverseList { variable_to_set: VariableLiteral, list_to_reverse: Option<List> },
     RemoveDuplicateListElements {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         list_to_deduplicate: Option<List>,
     },
     CreateDictionary {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         key_list: Option<List>,
         value_list: Option<List>,
     },
     RoundNumber { round_mode_tag: RoundModeRoundNumber },
     FaceLocation {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location_to_change: Option<Location>,
         target_location: Location,
         face_direction_tag: FaceDirectionFaceLocation,
     },
     GetItemLoreLine {},
     SetVectorLength {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         vector_to_change: Option<Vector>,
         length: Option<Number>,
     },
     SetPotionEffectDuration {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         potion_to_change: Option<Potion>,
         duration_ticks: Number,
     },
     SplitString {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         string_to_split: Text,
         splitter_string: Option<Text>,
     },
     SettoNormallyDistributedRandomNumber {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         mean_midpoint: Number,
         standard_deviation: Number,
         distribution_tag: DistributionSettoNormallyDistributedRandomNumber,
     },
     SetPotionEffectType {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         potion_to_change: Option<Potion>,
         type_: Text,
     },
-    AlignVector { variable_to_set: Variable, vector_to_align: Option<Vector> },
+    AlignVector { variable_to_set: VariableLiteral, vector_to_align: Option<Vector> },
     SetItemDurability {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item: Option<Item>,
         item_durability: Number,
         durability_type__tag: DurabilityTypeSetItemDurability,
     },
     SetItemBreakability {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item: Option<Item>,
         breakability_tag: BreakabilitySetItemBreakability,
     },
     GetSignTextN {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location: Location,
         sign_line_tag: SignLineGetSignTextN,
         sign_side_tag: SignSideGetSignTextN,
     },
     RaycastEntity {},
-    SetDictionaryValue { dictionary_to_add_to: Variable, key: Text, value: AnyType },
+    SetDictionaryValue {
+        dictionary_to_add_to: VariableLiteral,
+        key: Text,
+        value: AnyType,
+    },
     SetAllLocationCoordinates {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location_to_change: Option<Location>,
         new_x: Option<Number>,
         new_y: Option<Number>,
@@ -289,57 +329,60 @@ pub enum SetVariable {
         coordinate_type__tag: CoordinateTypeSetAllLocationCoordinates,
     },
     SettoRGBColor {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         red_c07c2557: Number,
         green_c07c2557: Number,
         blue_c07c2557: Either<Number, List>,
     },
     SetBreakableBlocks {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         breakable_blocks: Vec<Block>,
     },
     SettoHSLColor {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         hue_color_circle_c07c3607: Number,
         saturation_c07c1007: Option<Number>,
         lightness_c07c1007: Option<Either<Number, List>>,
     },
     GetDirection { return_type__tag: ReturnTypeGetDirection },
-    GetItemLoreN { variable_to_set: Variable, item_to_get_lore_from: Item },
-    RemoveListValueatIndex { list_to_change: Variable, index_to_remove: Vec<Number> },
+    GetItemLoreN { variable_to_set: VariableLiteral, item_to_get_lore_from: Item },
+    RemoveListValueatIndex {
+        list_to_change: VariableLiteral,
+        index_to_remove: Vec<Number>,
+    },
     SettoLogarithm {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         number_input: Option<Number>,
         base: Number,
     },
     SetItemCustomTag {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         tag_name: Text,
         tag_value: Either<Number, Text>,
     },
     TrimString {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         string_to_trim: Option<Text>,
         start_character_position: Number,
         end_character_position: Option<Number>,
     },
     ParseMiniMessageExpression {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         string_to_parse: Text,
         allowed_tags_tag: AllowedTagsParseMiniMessageExpression,
         parse_legacy_color_codes_tag: ParseLegacyColorCodesParseMiniMessageExpression,
     },
-    GetItemStackSize { variable_to_set: Variable, item_to_get_stack: Item },
+    GetItemStackSize { variable_to_set: VariableLiteral, item_to_get_stack: Item },
     SetPotionEffectAmplifier {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         potion_to_change: Option<Potion>,
         amplifier: Number,
     },
-    GetBreakableBlocks { variable_to_set: Variable, item: Item },
+    GetBreakableBlocks { variable_to_set: VariableLiteral, item: Item },
     RotateVectorAroundAxis {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         vector_to_rotate: Option<Vector>,
         angle: Number,
         axis_tag: AxisRotateVectorAroundAxis,
@@ -347,24 +390,24 @@ pub enum SetVariable {
     },
     GetItemNameN {},
     GetItemDurability {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item: Item,
         durability_type__tag: DurabilityTypeGetItemDurability,
     },
     ShiftLocationinDirection {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location_to_shift: Option<Location>,
         shift_distance: Option<Number>,
         direction_tag: DirectionShiftLocationinDirection,
     },
     WrapNumber {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         number_to_wrap: Option<Number>,
         lower_bound_inclusive: Number,
         upper_bound_exclusive: Number,
     },
     ReplaceString {
-        variable: Variable,
+        variable: VariableLiteral,
         string_to_change: Text,
         string_part_to_replace: Text,
         replacement: Text,
@@ -372,206 +415,220 @@ pub enum SetVariable {
         replacement_type__tag: ReplacementTypeReplaceString,
     },
     SetCompassLodestoneLocation {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         lodestone_location: Location,
         require_lodestone_at_location_tag: RequireLodestoneatLocationSetCompassLodestoneLocation,
     },
-    FlattenList { variable_to_set: Variable, list_to_flatten: Option<List> },
-    GetPotionEffectAmplifier { variable_to_set: Variable, potion_to_get: Potion },
-    GetParticleEffectAmount { variable_to_set: Variable, effect_to_get: Particle },
-    GetDictionarySize { variable_to_set: Variable, dictionary_to: Dict },
+    FlattenList { variable_to_set: VariableLiteral, list_to_flatten: Option<List> },
+    GetPotionEffectAmplifier { variable_to_set: VariableLiteral, potion_to_get: Potion },
+    GetParticleEffectAmount {
+        variable_to_set: VariableLiteral,
+        effect_to_get: Particle,
+    },
+    GetDictionarySize { variable_to_set: VariableLiteral, dictionary_to: Dict },
     SetItemStackSize {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         stack_size: Number,
     },
-    SubtractVectors { variable_to_set: Variable, vectors_to_subtract: Vec<Vector> },
+    SubtractVectors {
+        variable_to_set: VariableLiteral,
+        vectors_to_subtract: Vec<Vector>,
+    },
     SetStringCase {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         string_to_change: Option<Text>,
         capitalization_type__tag: CapitalizationTypeSetStringCase,
     },
     SetParticleEffectColor {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         effect_to: Option<Particle>,
         color_hexadecimal: Text,
         color_variation_: Option<Number>,
     },
     GetLightLevel {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         light_location: Location,
         light_type__tag: LightTypeGetLightLevel,
     },
-    GetBookText { variable_to_set: Variable, book: Item, page_number: Option<Number> },
-    GetDictionaryValues { variable_to_set: Variable, dictionary_to: Dict },
+    GetBookText {
+        variable_to_set: VariableLiteral,
+        book: Item,
+        page_number: Option<Number>,
+    },
+    GetDictionaryValues { variable_to_set: VariableLiteral, dictionary_to: Dict },
     SettoVector {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         x_component: Number,
         y_component: Number,
         z_component: Number,
     },
     SettoDistance {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location_1: Location,
         location_2: Location,
         distance_type__tag: DistanceTypeSettoDistance,
     },
     SetItemLore {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         lore: Vec<Either<MiniMessage, MiniMessage>>,
         line_number: Number,
     },
     SettoRoot {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         number_input: Option<Number>,
         root_index: Option<Number>,
     },
     SetParticleEffectAmount {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         effect_to: Option<Particle>,
         particle_amount: Number,
     },
     AddItemEnchantment {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         enchantment_name: Text,
         enchantment_level: Number,
     },
     GetItemMaterial {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_get_material_of: Item,
         return_value_type__tag: ReturnValueTypeGetItemMaterial,
     },
-    GetLocationDirection { variable_to_set: Variable, location_to_get: Location },
+    GetLocationDirection { variable_to_set: VariableLiteral, location_to_get: Location },
     GetLoreLine {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_get_lore_from: Item,
         lore_line_to_get: Number,
     },
-    GetParticleEffectType { variable_to_set: Variable, effect_to_get: Particle },
+    GetParticleEffectType { variable_to_set: VariableLiteral, effect_to_get: Particle },
     RemoveString {
-        variable: Variable,
+        variable: VariableLiteral,
         string_to_change: Option<Text>,
         string_to_remove: Vec<Text>,
         regular_expressions_tag: RegularExpressionsRemoveString,
     },
     GetAllBlockData {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         block_location: Location,
         hide_default_tag: HideDefaultGetAllBlockData,
     },
-    SettoMaximumNumber { variable_to_set: Variable, number_set: Vec<Number> },
-    GetDictionaryKeys { variable_to_set: Variable, dictionary_to: Dict },
+    SettoMaximumNumber { variable_to_set: VariableLiteral, number_set: Vec<Number> },
+    GetDictionaryKeys { variable_to_set: VariableLiteral, dictionary_to: Dict },
     TrimStyledTextContent {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         text_to_trim: Option<MiniMessage>,
         start_character_position: Number,
         end_character_position: Option<Number>,
     },
     SetParticleEffectMaterial {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         effect_to: Option<Particle>,
         particle_material: Item,
     },
     GetLocationCoordinate {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location_to_get: Location,
         coordinate_type__tag: CoordinateTypeGetLocationCoordinate,
         coordinate_tag: CoordinateGetLocationCoordinate,
     },
     RemoveItemCustomTag {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         tag_name: Text,
     },
     SetParticleEffectSize {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         effect_to: Option<Particle>,
         particle_size: Number,
         size_variation_: Option<Number>,
     },
-    GetPotionEffectDuration { variable_to_set: Variable, potion_to_get: Potion },
+    GetPotionEffectDuration { variable_to_set: VariableLiteral, potion_to_get: Potion },
     SettoRandomLocation {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location_1: Location,
         location_2: Location,
     },
     SetSoundType {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         sound_to_change: Option<Sound>,
         sound_name_eg_rabbit_eat: Text,
     },
     GetCompassLodestoneLocation {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         compass_to_get_lodestone: Item,
     },
     ShiftDirection { direction_tag: DirectionShiftDirection },
     GetContainerNameN {},
     GetParticleEffectSpread {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         effect_to_get: Particle,
         spread_tag: SpreadGetParticleEffectSpread,
     },
     ReflectVector {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         vector_to_reflect: Option<Vector>,
         surface_vector: Vector,
     },
     GetHeadOwner {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         head_to_get_owner_of: Item,
         text_value_tag: TextValueGetHeadOwner,
     },
     GetItemEnchants {},
-    AppendDictionary { dictionary_to: Variable, dictionary: Dict },
+    AppendDictionary { dictionary_to: VariableLiteral, dictionary: Dict },
     GetItemMaximumStackSize {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_get_maximum_stack: Item,
     },
     GetColorChannels {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         color_hexadecimal: Text,
         color_channels_tag: ColorChannelsGetColorChannels,
     },
     SetLocationDirection {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location_to_change: Option<Location>,
         direction: Vector,
     },
-    SetListValue { list_to_change: Variable, index: Number, value_to_set: AnyType },
+    SetListValue {
+        list_to_change: VariableLiteral,
+        index: Number,
+        value_to_set: AnyType,
+    },
     SetItemEnchantments {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         enchantments: Dict,
     },
     SetBookText {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         book: Option<Item>,
         pages: Vec<Either<MiniMessage, MiniMessage>>,
         page_number: Number,
     },
-    SettoRandomValue { variable_to_set: Variable, value_set: Vec<AnyType> },
+    SettoRandomValue { variable_to_set: VariableLiteral, value_set: Vec<AnyType> },
     SetItemMaterial {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         material: Text,
     },
-    GetSoundType { variable_to_set: Variable, sound_to_get_type__of: Sound },
+    GetSoundType { variable_to_set: VariableLiteral, sound_to_get_type__of: Sound },
     GetListValue {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         list_to_get_value_of: List,
         index: Number,
     },
     SettoTangent {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         number_input: Number,
         tangent_variant_tag: TangentVariantSettoTangent,
         input_tag: InputSettoTangent,
     },
     GetVoronoiNoise {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         noise_location: Location,
         cell_frequency: Option<Number>,
         cell_scatter: Option<Number>,
@@ -580,49 +637,52 @@ pub enum SetVariable {
     },
     SetDirection { face_direction_tag: FaceDirectionSetDirection },
     SettoHSBColor {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         hue_color_circle_c07c3607: Number,
         saturation_c07c1007: Option<Number>,
         brightness_c07c1007: Option<Either<Number, List>>,
     },
-    IncrementNumberEq { variable: Variable, numbers_to: Vec<Number> },
-    GetSoundVariant { variable_to_set: Variable, sound_to_get_variant_of: Sound },
-    GetItemColor { variable: Variable, item_to_get_color_of: Item },
-    ClearFormatting { variable_to_set: Variable, text_to_change: Option<MiniMessage> },
+    IncrementNumberEq { variable: VariableLiteral, numbers_to: Vec<Number> },
+    GetSoundVariant { variable_to_set: VariableLiteral, sound_to_get_variant_of: Sound },
+    GetItemColor { variable: VariableLiteral, item_to_get_color_of: Item },
+    ClearFormatting {
+        variable_to_set: VariableLiteral,
+        text_to_change: Option<MiniMessage>,
+    },
     InsertListValue {
-        list_to_change: Variable,
+        list_to_change: VariableLiteral,
         index: Number,
         value_to_insert: AnyType,
     },
     SetSoundVolume {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         sound_to_change: Option<Sound>,
         volume: Number,
     },
     SetLocationCoordinate {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location_to_change: Option<Location>,
         coordinate: Number,
         coordinate_type__tag: CoordinateTypeSetLocationCoordinate,
         coordinate_tag: CoordinateSetLocationCoordinate,
     },
-    AddVectors { variable_to_set: Variable, vectors_to_add: Vec<Vector> },
+    AddVectors { variable_to_set: VariableLiteral, vectors_to_add: Vec<Vector> },
     SetPitch {},
     RaycastBlock {
         ignore_passable_blocks_tag: IgnorePassableBlocksRaycastBlock,
         fluid_collision_tag: FluidCollisionRaycastBlock,
     },
     GetItemEnchantments {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_get_enchantments_from: Item,
     },
     SetHeadTexture {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         player_head: Option<Item>,
         owner_name_uuid_or: Text,
     },
     GetPerlinNoise {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         noise_location: Location,
         frequency_scale: Option<Number>,
         octaves_perlin_layers: Option<Number>,
@@ -632,7 +692,7 @@ pub enum SetVariable {
         fractal_type__tag: FractalTypeGetPerlinNoise,
     },
     GetWorleyNoise {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         noise_location: Location,
         cell_frequency: Option<Number>,
         cell_scatter: Option<Number>,
@@ -641,46 +701,46 @@ pub enum SetVariable {
         distance_calculation_tag: DistanceCalculationGetWorleyNoise,
     },
     SetItemColor {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         color_hexadecimal: Text,
     },
-    GetParticleEffectColor { variable_to_set: Variable, effect_to_get: Particle },
+    GetParticleEffectColor { variable_to_set: VariableLiteral, effect_to_get: Particle },
     SetSoundPitch {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         sound_to_change: Option<Sound>,
         pitch: Either<Number, Text>,
     },
     RoundNumberN {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         number_to_round: Option<Number>,
         round_multiple: Option<Number>,
         round_mode_tag: RoundModeRoundNumberN,
     },
-    GetPlaceableBlocks { variable_to_set: Variable, item: Item },
+    GetPlaceableBlocks { variable_to_set: VariableLiteral, item: Item },
     SortList {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         list_to_sort: Option<List>,
         sort_order_tag: SortOrderSortList,
     },
     SetCustomSoundKey {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         sound_to_change: Option<Sound>,
         sound_key: Option<Text>,
     },
     RemoveDictionaryEntry {
-        dictionary_to_change: Variable,
+        dictionary_to_change: VariableLiteral,
         key_to_remove: Text,
         expected_values: Vec<AnyType>,
     },
     FormatTimestamp {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         time_to_format: Number,
         custom_format: Option<Text>,
         format_tag: FormatFormatTimestamp,
     },
     SetItemVisibilityFlags {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item: Option<Item>,
         hide_armor_trim_tag: HideArmorTrimSetItemVisibilityFlags,
         hide_color_tag: HideColorSetItemVisibilityFlags,
@@ -691,136 +751,155 @@ pub enum SetVariable {
         hide_can_place_on_tag: HideCanPlaceOnSetItemVisibilityFlags,
         hide_potion_effects_tag: HidePotionEffectsSetItemVisibilityFlags,
     },
-    GetStringLength { variable_to_set: Variable, string_to_measure: Text },
-    GetItemPotionEffects { variable_to_set: Variable, item_to_get_effects_from: Item },
-    GetMiniMessageExpression { variable_to_set: Variable, text_to_read: MiniMessage },
+    GetStringLength { variable_to_set: VariableLiteral, string_to_measure: Text },
+    GetItemPotionEffects {
+        variable_to_set: VariableLiteral,
+        item_to_get_effects_from: Item,
+    },
+    GetMiniMessageExpression {
+        variable_to_set: VariableLiteral,
+        text_to_read: MiniMessage,
+    },
     SetYaw {},
     SetItemPotionEffects {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         item_effects: Vec<Potion>,
     },
-    DecrementNumberEq { variable: Variable, numbers_to: Vec<Number> },
+    DecrementNumberEq { variable: VariableLiteral, numbers_to: Vec<Number> },
     GetItemCustomTag {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_get_tag_of: Item,
         tag_name: Text,
     },
-    CreateList { variable_to_set: Variable, value_list: Vec<AnyType> },
-    AppendListtoList { list_to_append_to: Variable, lists_to_append: Vec<List> },
+    CreateList { variable_to_set: VariableLiteral, value_list: Vec<AnyType> },
+    AppendListtoList { list_to_append_to: VariableLiteral, lists_to_append: Vec<List> },
     GetContainerContents {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         container_location: Location,
         ignore_empty_slots_tag: IgnoreEmptySlotsGetContainerContents,
     },
     ShiftLocationTowardLocation {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location_to_shift: Option<Location>,
         target_location: Location,
         shift_distance: Option<Number>,
     },
     TrimList {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         list_to_trim: Option<List>,
         start_index: Number,
         end_index: Option<Number>,
     },
     SettoCosine {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         number_input: Number,
         cosine_variant_tag: CosineVariantSettoCosine,
         input_tag: InputSettoCosine,
     },
     SetVectorComponent {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         vector_to_change: Option<Vector>,
         component: Number,
         component_tag: ComponentSetVectorComponent,
     },
-    ParseNumberfromString { variable_to_set: Variable, string_to_convert: Option<Text> },
+    ParseNumberfromString {
+        variable_to_set: VariableLiteral,
+        string_to_convert: Option<Text>,
+    },
     SettoExponential {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         number_input: Option<Number>,
         exponent: Option<Number>,
     },
     ShiftAllDirs { ignore_pitch_tag: IgnorePitchShiftAllDirs },
     GetListIndexofValue {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         list_to_search_in: List,
         value_to_search: AnyType,
         search_order_tag: SearchOrderGetListIndexofValue,
     },
     RemoveItemEnchantment {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         enchantment_name: Text,
     },
     GetBookTextN {},
     SetParticleRoll {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         effect_to: Option<Particle>,
         particle_roll: Number,
     },
     SetSoundVariant {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         sound_to_change: Option<Sound>,
         variant_id_eg_break1: Option<Text>,
     },
     ShiftLocation { shift_direction_tag: ShiftDirectionShiftLocation },
-    RandomizeList { variable_to_set: Variable, list_to_randomize: Option<List> },
+    RandomizeList { variable_to_set: VariableLiteral, list_to_randomize: Option<List> },
     ClampNumber {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         number_to_clamp: Option<Number>,
         minimum: Number,
         maximum: Number,
     },
     Round { round_mode_tag: RoundModeRound },
     GetSoundPitch {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         sound_to_get_pitch_or: Sound,
         return_value_type__tag: ReturnValueTypeGetSoundPitch,
     },
     TranslateColors { translation_type__tag: TranslationTypeTranslateColors },
     GetBlockGrowth {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         block_location: Location,
         growth_unit_tag: GrowthUnitGetBlockGrowth,
     },
-    GetAllCustomItemTags { variable_to_set: Variable, item_to_get_tags_from: Item },
-    RemoveListValue { list_to_change: Variable, values_to: Vec<AnyType> },
+    GetAllCustomItemTags {
+        variable_to_set: VariableLiteral,
+        item_to_get_tags_from: Item,
+    },
+    RemoveListValue { list_to_change: VariableLiteral, values_to: Vec<AnyType> },
     ShiftLocationinAllDirections {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         location_to_shift: Option<Location>,
         forwards_change: Option<Number>,
         upwards_change: Option<Number>,
         sideways_change_l__r: Option<Number>,
     },
     SetPlaceableBlocks {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         placeable_blocks: Vec<Block>,
     },
     GetBlockMaterial {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         block_location: Location,
         return_value_type__tag: ReturnValueTypeGetBlockMaterial,
     },
     ParsePitch {},
-    GetDictionaryValue { variable_to_set: Variable, dictionary_to: Dict, key: Text },
-    GetContainerLock { variable_to_set: Variable, container_location: Location },
-    GetBlockPower { variable_to_set: Variable, block_location: Location },
+    GetDictionaryValue {
+        variable_to_set: VariableLiteral,
+        dictionary_to: Dict,
+        key: Text,
+    },
+    GetContainerLock { variable_to_set: VariableLiteral, container_location: Location },
+    GetBlockPower { variable_to_set: VariableLiteral, block_location: Location },
     GetVectorLength {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         vector_to_get: Vector,
         length_type__tag: LengthTypeGetVectorLength,
     },
     SetCustomModelData {
-        variable_to_set: Variable,
+        variable_to_set: VariableLiteral,
         item_to_change: Option<Item>,
         model_value: Number,
     },
     SetCoords {},
-    GetParticleEffectSize { variable_to_set: Variable, effect_to_get: Option<Particle> },
+    GetParticleEffectSize {
+        variable_to_set: VariableLiteral,
+        effect_to_get: Option<Particle>,
+    },
 }
 impl SetVariable {
     pub fn compile(&self) -> Value {
@@ -831,7 +910,7 @@ impl SetVariable {
                 text_value_merging_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), string_to_set_to.json()],
                     vec![text_value_merging_tag.json()],
                 );
@@ -846,7 +925,7 @@ impl SetVariable {
             }
             SetVariable::SetParticleEffectType { variable_to_set, effect_to, type_ } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), effect_to.json(), type_.json()],
                     vec![],
                 );
@@ -861,7 +940,7 @@ impl SetVariable {
             }
             SetVariable::SetItemEnchants {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -877,7 +956,7 @@ impl SetVariable {
                 ignore_case_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![name_to_match.json()],
                     vec![match_requirement_tag.json(), ignore_case_tag.json()],
                 );
@@ -898,7 +977,7 @@ impl SetVariable {
                 z_change,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), location_to_change.json(), x_change
                         .json(), y_change.json(), z_change.json()
@@ -919,7 +998,7 @@ impl SetVariable {
                 effect_to_get,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), effect_to_get.json()],
                     vec![],
                 );
@@ -939,7 +1018,7 @@ impl SetVariable {
                 vertical_spread,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), effect_to_change.json(),
                         horizontal_spread.json(), vertical_spread.json()
@@ -957,7 +1036,7 @@ impl SetVariable {
             }
             SetVariable::SettoAbsoluteValue { variable_to_set, number_input } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), number_input.json()],
                     vec![],
                 );
@@ -972,7 +1051,7 @@ impl SetVariable {
             }
             SetVariable::AppendValuetoList { list_to_append_to, values_to_append } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![list_to_append_to.json(), values_to_append.json()],
                     vec![],
                 );
@@ -992,7 +1071,7 @@ impl SetVariable {
                 remainder_mode_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), dividend.json(), divisor.json()],
                     vec![remainder_mode_tag.json()],
                 );
@@ -1013,7 +1092,7 @@ impl SetVariable {
                 add_location_rotation_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), location_to_shift.json(), shift_vector
                         .json(), shift_distance.json()
@@ -1036,7 +1115,7 @@ impl SetVariable {
                 active_equipment_slot_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item.json()],
                     vec![attribute_tag.json(), active_equipment_slot_tag.json()],
                 );
@@ -1051,7 +1130,7 @@ impl SetVariable {
             }
             SetVariable::ClearDictionary { dictionary_to_clear } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![dictionary_to_clear.json()], vec![]);
+                let item_args = compile(vec![dictionary_to_clear.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1063,7 +1142,7 @@ impl SetVariable {
             }
             SetVariable::AddNumbers { variable_to_set, numbers_to_add } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), numbers_to_add.json()],
                     vec![],
                 );
@@ -1083,7 +1162,7 @@ impl SetVariable {
                 rotation_axis_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), location_to_shift.json(), rotation_amount
                         .json()
@@ -1101,7 +1180,7 @@ impl SetVariable {
             }
             SetVariable::SubtractNumbers { variable_to_set, numbers_to_subtract } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), numbers_to_subtract.json()],
                     vec![],
                 );
@@ -1116,7 +1195,7 @@ impl SetVariable {
             }
             SetVariable::GetItemName { variable_to_set, item_to_get_name_of } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item_to_get_name_of.json()],
                     vec![],
                 );
@@ -1131,7 +1210,7 @@ impl SetVariable {
             }
             SetVariable::GetItemRarity { variable_to_set, item } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item.json()],
                     vec![],
                 );
@@ -1150,7 +1229,7 @@ impl SetVariable {
                 multiplier,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), vector_to_multiply.json(), multiplier
                         .json()
@@ -1172,7 +1251,7 @@ impl SetVariable {
                 division_mode_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), numbers_to_divide.json()],
                     vec![division_mode_tag.json()],
                 );
@@ -1187,7 +1266,7 @@ impl SetVariable {
             }
             SetVariable::GetSignText { sign_line_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![sign_line_tag.json()]);
+                let item_args = compile(vec![], vec![sign_line_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1204,7 +1283,7 @@ impl SetVariable {
                 operator_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), operand_1.json(), operand_2.json()],
                     vec![operator_tag.json()],
                 );
@@ -1219,7 +1298,7 @@ impl SetVariable {
             }
             SetVariable::GetLecternPage { variable_to_set, lectern_location } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), lectern_location.json()],
                     vec![],
                 );
@@ -1234,7 +1313,7 @@ impl SetVariable {
             }
             SetVariable::ParseX {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1251,7 +1330,7 @@ impl SetVariable {
                 coordinate_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), location_to_shift.json(), shift_distance
                         .json()
@@ -1269,7 +1348,7 @@ impl SetVariable {
             }
             SetVariable::ParseY {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1285,7 +1364,7 @@ impl SetVariable {
                 end_location,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), start_location.json(), end_location
                         .json()
@@ -1303,7 +1382,7 @@ impl SetVariable {
             }
             SetVariable::ParseZ {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1319,7 +1398,7 @@ impl SetVariable {
                 component_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), vector_to_get.json()],
                     vec![component_tag.json()],
                 );
@@ -1334,7 +1413,7 @@ impl SetVariable {
             }
             SetVariable::SettoValueEq { variable_to_set, value } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), value.json()],
                     vec![],
                 );
@@ -1349,10 +1428,7 @@ impl SetVariable {
             }
             SetVariable::RmText { regular_expressions_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
-                    vec![],
-                    vec![regular_expressions_tag.json()],
-                );
+                let item_args = compile(vec![], vec![regular_expressions_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1371,7 +1447,7 @@ impl SetVariable {
                 active_equipment_slot_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item.json(), modifier_amount.json()],
                     vec![
                         attribute_tag.json(), operation_tag.json(),
@@ -1392,7 +1468,7 @@ impl SetVariable {
                 locations_to_center,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), locations_to_center.json()],
                     vec![],
                 );
@@ -1413,7 +1489,7 @@ impl SetVariable {
                 rotation_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), location_to_align.json()],
                     vec![
                         alignment_mode_tag.json(), coordinates_tag.json(), rotation_tag
@@ -1431,7 +1507,7 @@ impl SetVariable {
             }
             SetVariable::GetSoundVolume { variable_to_set, sound_to_get_volume_of } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), sound_to_get_volume_of.json()],
                     vec![],
                 );
@@ -1451,7 +1527,7 @@ impl SetVariable {
                 rounding_mode_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), minimum_number.json(), maximum_number
                         .json()
@@ -1469,7 +1545,7 @@ impl SetVariable {
             }
             SetVariable::GetContainerName { variable_to_set, container_location } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), container_location.json()],
                     vec![],
                 );
@@ -1490,7 +1566,7 @@ impl SetVariable {
                 block_collision_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), ray_origin.json(), ray_distance.json()],
                     vec![entity_collision_tag.json(), block_collision_tag.json()],
                 );
@@ -1511,7 +1587,7 @@ impl SetVariable {
                 angle_units_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), vector_to_rotate.json(), axis_vector
                         .json(), angle.json()
@@ -1529,7 +1605,7 @@ impl SetVariable {
             }
             SetVariable::GetParticleEffectMotion { variable_to_set, effect_to_get } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), effect_to_get.json()],
                     vec![],
                 );
@@ -1549,7 +1625,7 @@ impl SetVariable {
                 motion_variation_,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), effect_to.json(), particle_motion.json(),
                         motion_variation_.json()
@@ -1567,7 +1643,7 @@ impl SetVariable {
             }
             SetVariable::SettoAverageNumber { variable_to_set, numbers_to_average } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), numbers_to_average.json()],
                     vec![],
                 );
@@ -1582,7 +1658,7 @@ impl SetVariable {
             }
             SetVariable::WrapNumberOld {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1594,7 +1670,7 @@ impl SetVariable {
             }
             SetVariable::SetY {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1610,7 +1686,7 @@ impl SetVariable {
                 image_url,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), item_to_change.json(), image_url.json()
                     ],
@@ -1627,7 +1703,7 @@ impl SetVariable {
             }
             SetVariable::GetBlockData { variable_to_set, block_location, tag_name } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), block_location.json(), tag_name.json()],
                     vec![],
                 );
@@ -1642,7 +1718,7 @@ impl SetVariable {
             }
             SetVariable::SetX {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1659,7 +1735,7 @@ impl SetVariable {
                 sorting_order_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), dictionary_to_sort.json()],
                     vec![sorting_type__tag.json(), sorting_order_tag.json()],
                 );
@@ -1674,7 +1750,7 @@ impl SetVariable {
             }
             SetVariable::GetLecternBook { variable_to_set, lectern_location } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), lectern_location.json()],
                     vec![],
                 );
@@ -1689,7 +1765,7 @@ impl SetVariable {
             }
             SetVariable::GetCustomSoundKey { variable_to_set, sound_to_get_key_of } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), sound_to_get_key_of.json()],
                     vec![],
                 );
@@ -1704,7 +1780,7 @@ impl SetVariable {
             }
             SetVariable::SettoCrossProduct { variable_to_set, vector_1, vector_2 } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), vector_1.json(), vector_2.json()],
                     vec![],
                 );
@@ -1719,7 +1795,7 @@ impl SetVariable {
             }
             SetVariable::MultiplyNumbers { variable_to_set, numbers_to_multiply } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), numbers_to_multiply.json()],
                     vec![],
                 );
@@ -1734,7 +1810,7 @@ impl SetVariable {
             }
             SetVariable::GetParticleRoll { variable_to_set, effect_to_get } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), effect_to_get.json()],
                     vec![],
                 );
@@ -1749,7 +1825,7 @@ impl SetVariable {
             }
             SetVariable::ParseYaw {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1761,7 +1837,7 @@ impl SetVariable {
             }
             SetVariable::SettoDotProduct { variable_to_set, vector_1, vector_2 } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), vector_1.json(), vector_2.json()],
                     vec![],
                 );
@@ -1776,7 +1852,7 @@ impl SetVariable {
             }
             SetVariable::SetZ {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1793,7 +1869,7 @@ impl SetVariable {
                 trim_material_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item_to_change.json()],
                     vec![trim_pattern_tag.json(), trim_material_tag.json()],
                 );
@@ -1812,7 +1888,7 @@ impl SetVariable {
                 index,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), list_to_get_value_of.json(), index.json()
                     ],
@@ -1829,7 +1905,7 @@ impl SetVariable {
             }
             SetVariable::SettoMinimumNumber { variable_to_set, number_set } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), number_set.json()],
                     vec![],
                 );
@@ -1844,7 +1920,7 @@ impl SetVariable {
             }
             SetVariable::GetPotionEffectType { variable_to_set, potion_to_get } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), potion_to_get.json()],
                     vec![],
                 );
@@ -1859,7 +1935,7 @@ impl SetVariable {
             }
             SetVariable::SetItemName { variable_to_set, item_to_change, name } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item_to_change.json(), name.json()],
                     vec![],
                 );
@@ -1874,7 +1950,7 @@ impl SetVariable {
             }
             SetVariable::GetListLength { variable_to_set, list_to_measure } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), list_to_measure.json()],
                     vec![],
                 );
@@ -1894,7 +1970,7 @@ impl SetVariable {
                 input_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), number_input.json()],
                     vec![sine_variant_tag.json(), input_tag.json()],
                 );
@@ -1909,7 +1985,7 @@ impl SetVariable {
             }
             SetVariable::SettoDirectionName { variable_to_set, direction } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), direction.json()],
                     vec![],
                 );
@@ -1928,7 +2004,7 @@ impl SetVariable {
                 times_to_repeat,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), string_to_repeat.json(), times_to_repeat
                         .json()
@@ -1946,7 +2022,7 @@ impl SetVariable {
             }
             SetVariable::GetItemLore {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1963,7 +2039,7 @@ impl SetVariable {
                 final_joining_string,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), strings_to_join.json(), joining_string
                         .json(), final_joining_string.json()
@@ -1981,7 +2057,7 @@ impl SetVariable {
             }
             SetVariable::ReverseList { variable_to_set, list_to_reverse } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), list_to_reverse.json()],
                     vec![],
                 );
@@ -1999,7 +2075,7 @@ impl SetVariable {
                 list_to_deduplicate,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), list_to_deduplicate.json()],
                     vec![],
                 );
@@ -2014,7 +2090,7 @@ impl SetVariable {
             }
             SetVariable::CreateDictionary { variable_to_set, key_list, value_list } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), key_list.json(), value_list.json()],
                     vec![],
                 );
@@ -2029,7 +2105,7 @@ impl SetVariable {
             }
             SetVariable::RoundNumber { round_mode_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![round_mode_tag.json()]);
+                let item_args = compile(vec![], vec![round_mode_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2046,7 +2122,7 @@ impl SetVariable {
                 face_direction_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), location_to_change.json(),
                         target_location.json()
@@ -2064,7 +2140,7 @@ impl SetVariable {
             }
             SetVariable::GetItemLoreLine {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2080,7 +2156,7 @@ impl SetVariable {
                 length,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), vector_to_change.json(), length.json()],
                     vec![],
                 );
@@ -2099,7 +2175,7 @@ impl SetVariable {
                 duration_ticks,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), potion_to_change.json(), duration_ticks
                         .json()
@@ -2121,7 +2197,7 @@ impl SetVariable {
                 splitter_string,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), string_to_split.json(), splitter_string
                         .json()
@@ -2144,7 +2220,7 @@ impl SetVariable {
                 distribution_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), mean_midpoint.json(), standard_deviation
                         .json()
@@ -2166,7 +2242,7 @@ impl SetVariable {
                 type_,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), potion_to_change.json(), type_.json()],
                     vec![],
                 );
@@ -2181,7 +2257,7 @@ impl SetVariable {
             }
             SetVariable::AlignVector { variable_to_set, vector_to_align } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), vector_to_align.json()],
                     vec![],
                 );
@@ -2201,7 +2277,7 @@ impl SetVariable {
                 durability_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item.json(), item_durability.json()],
                     vec![durability_type__tag.json()],
                 );
@@ -2220,7 +2296,7 @@ impl SetVariable {
                 breakability_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item.json()],
                     vec![breakability_tag.json()],
                 );
@@ -2240,7 +2316,7 @@ impl SetVariable {
                 sign_side_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), location.json()],
                     vec![sign_line_tag.json(), sign_side_tag.json()],
                 );
@@ -2255,7 +2331,7 @@ impl SetVariable {
             }
             SetVariable::RaycastEntity {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2267,7 +2343,7 @@ impl SetVariable {
             }
             SetVariable::SetDictionaryValue { dictionary_to_add_to, key, value } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![dictionary_to_add_to.json(), key.json(), value.json()],
                     vec![],
                 );
@@ -2291,7 +2367,7 @@ impl SetVariable {
                 coordinate_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), location_to_change.json(), new_x.json(),
                         new_y.json(), new_z.json(), new_pitch.json(), new_yaw.json()
@@ -2314,7 +2390,7 @@ impl SetVariable {
                 blue_c07c2557,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), red_c07c2557.json(), green_c07c2557
                         .json(), blue_c07c2557.json()
@@ -2336,7 +2412,7 @@ impl SetVariable {
                 breakable_blocks,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), item_to_change.json(), breakable_blocks
                         .json()
@@ -2359,7 +2435,7 @@ impl SetVariable {
                 lightness_c07c1007,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), hue_color_circle_c07c3607.json(),
                         saturation_c07c1007.json(), lightness_c07c1007.json()
@@ -2377,7 +2453,7 @@ impl SetVariable {
             }
             SetVariable::GetDirection { return_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![return_type__tag.json()]);
+                let item_args = compile(vec![], vec![return_type__tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2389,7 +2465,7 @@ impl SetVariable {
             }
             SetVariable::GetItemLoreN { variable_to_set, item_to_get_lore_from } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item_to_get_lore_from.json()],
                     vec![],
                 );
@@ -2404,7 +2480,7 @@ impl SetVariable {
             }
             SetVariable::RemoveListValueatIndex { list_to_change, index_to_remove } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![list_to_change.json(), index_to_remove.json()],
                     vec![],
                 );
@@ -2419,7 +2495,7 @@ impl SetVariable {
             }
             SetVariable::SettoLogarithm { variable_to_set, number_input, base } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), number_input.json(), base.json()],
                     vec![],
                 );
@@ -2439,7 +2515,7 @@ impl SetVariable {
                 tag_value,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), item_to_change.json(), tag_name.json(),
                         tag_value.json()
@@ -2462,7 +2538,7 @@ impl SetVariable {
                 end_character_position,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), string_to_trim.json(),
                         start_character_position.json(), end_character_position.json()
@@ -2485,7 +2561,7 @@ impl SetVariable {
                 parse_legacy_color_codes_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), string_to_parse.json()],
                     vec![allowed_tags_tag.json(), parse_legacy_color_codes_tag.json()],
                 );
@@ -2500,7 +2576,7 @@ impl SetVariable {
             }
             SetVariable::GetItemStackSize { variable_to_set, item_to_get_stack } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item_to_get_stack.json()],
                     vec![],
                 );
@@ -2519,7 +2595,7 @@ impl SetVariable {
                 amplifier,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), potion_to_change.json(), amplifier.json()
                     ],
@@ -2536,7 +2612,7 @@ impl SetVariable {
             }
             SetVariable::GetBreakableBlocks { variable_to_set, item } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item.json()],
                     vec![],
                 );
@@ -2557,7 +2633,7 @@ impl SetVariable {
                 angle_units_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), vector_to_rotate.json(), angle.json()],
                     vec![axis_tag.json(), angle_units_tag.json()],
                 );
@@ -2572,7 +2648,7 @@ impl SetVariable {
             }
             SetVariable::GetItemNameN {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2588,7 +2664,7 @@ impl SetVariable {
                 durability_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item.json()],
                     vec![durability_type__tag.json()],
                 );
@@ -2608,7 +2684,7 @@ impl SetVariable {
                 direction_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), location_to_shift.json(), shift_distance
                         .json()
@@ -2631,7 +2707,7 @@ impl SetVariable {
                 upper_bound_exclusive,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), number_to_wrap.json(),
                         lower_bound_inclusive.json(), upper_bound_exclusive.json()
@@ -2656,7 +2732,7 @@ impl SetVariable {
                 replacement_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable.json(), string_to_change.json(), string_part_to_replace
                         .json(), replacement.json()
@@ -2679,7 +2755,7 @@ impl SetVariable {
                 require_lodestone_at_location_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), item_to_change.json(), lodestone_location
                         .json()
@@ -2697,7 +2773,7 @@ impl SetVariable {
             }
             SetVariable::FlattenList { variable_to_set, list_to_flatten } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), list_to_flatten.json()],
                     vec![],
                 );
@@ -2712,7 +2788,7 @@ impl SetVariable {
             }
             SetVariable::GetPotionEffectAmplifier { variable_to_set, potion_to_get } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), potion_to_get.json()],
                     vec![],
                 );
@@ -2727,7 +2803,7 @@ impl SetVariable {
             }
             SetVariable::GetParticleEffectAmount { variable_to_set, effect_to_get } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), effect_to_get.json()],
                     vec![],
                 );
@@ -2742,7 +2818,7 @@ impl SetVariable {
             }
             SetVariable::GetDictionarySize { variable_to_set, dictionary_to } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), dictionary_to.json()],
                     vec![],
                 );
@@ -2761,7 +2837,7 @@ impl SetVariable {
                 stack_size,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), item_to_change.json(), stack_size.json()
                     ],
@@ -2778,7 +2854,7 @@ impl SetVariable {
             }
             SetVariable::SubtractVectors { variable_to_set, vectors_to_subtract } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), vectors_to_subtract.json()],
                     vec![],
                 );
@@ -2797,7 +2873,7 @@ impl SetVariable {
                 capitalization_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), string_to_change.json()],
                     vec![capitalization_type__tag.json()],
                 );
@@ -2817,7 +2893,7 @@ impl SetVariable {
                 color_variation_,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), effect_to.json(), color_hexadecimal
                         .json(), color_variation_.json()
@@ -2839,7 +2915,7 @@ impl SetVariable {
                 light_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), light_location.json()],
                     vec![light_type__tag.json()],
                 );
@@ -2854,7 +2930,7 @@ impl SetVariable {
             }
             SetVariable::GetBookText { variable_to_set, book, page_number } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), book.json(), page_number.json()],
                     vec![],
                 );
@@ -2869,7 +2945,7 @@ impl SetVariable {
             }
             SetVariable::GetDictionaryValues { variable_to_set, dictionary_to } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), dictionary_to.json()],
                     vec![],
                 );
@@ -2889,7 +2965,7 @@ impl SetVariable {
                 z_component,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), x_component.json(), y_component.json(),
                         z_component.json()
@@ -2912,7 +2988,7 @@ impl SetVariable {
                 distance_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), location_1.json(), location_2.json()],
                     vec![distance_type__tag.json()],
                 );
@@ -2932,7 +3008,7 @@ impl SetVariable {
                 line_number,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), item_to_change.json(), lore.json(),
                         line_number.json()
@@ -2950,7 +3026,7 @@ impl SetVariable {
             }
             SetVariable::SettoRoot { variable_to_set, number_input, root_index } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), number_input.json(), root_index.json()],
                     vec![],
                 );
@@ -2969,7 +3045,7 @@ impl SetVariable {
                 particle_amount,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), effect_to.json(), particle_amount.json()
                     ],
@@ -2991,7 +3067,7 @@ impl SetVariable {
                 enchantment_level,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), item_to_change.json(), enchantment_name
                         .json(), enchantment_level.json()
@@ -3013,7 +3089,7 @@ impl SetVariable {
                 return_value_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item_to_get_material_of.json()],
                     vec![return_value_type__tag.json()],
                 );
@@ -3028,7 +3104,7 @@ impl SetVariable {
             }
             SetVariable::GetLocationDirection { variable_to_set, location_to_get } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), location_to_get.json()],
                     vec![],
                 );
@@ -3047,7 +3123,7 @@ impl SetVariable {
                 lore_line_to_get,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), item_to_get_lore_from.json(),
                         lore_line_to_get.json()
@@ -3065,7 +3141,7 @@ impl SetVariable {
             }
             SetVariable::GetParticleEffectType { variable_to_set, effect_to_get } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), effect_to_get.json()],
                     vec![],
                 );
@@ -3085,7 +3161,7 @@ impl SetVariable {
                 regular_expressions_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable.json(), string_to_change.json(), string_to_remove.json()
                     ],
@@ -3106,7 +3182,7 @@ impl SetVariable {
                 hide_default_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), block_location.json()],
                     vec![hide_default_tag.json()],
                 );
@@ -3121,7 +3197,7 @@ impl SetVariable {
             }
             SetVariable::SettoMaximumNumber { variable_to_set, number_set } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), number_set.json()],
                     vec![],
                 );
@@ -3136,7 +3212,7 @@ impl SetVariable {
             }
             SetVariable::GetDictionaryKeys { variable_to_set, dictionary_to } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), dictionary_to.json()],
                     vec![],
                 );
@@ -3156,7 +3232,7 @@ impl SetVariable {
                 end_character_position,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), text_to_trim.json(),
                         start_character_position.json(), end_character_position.json()
@@ -3178,7 +3254,7 @@ impl SetVariable {
                 particle_material,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), effect_to.json(), particle_material
                         .json()
@@ -3201,7 +3277,7 @@ impl SetVariable {
                 coordinate_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), location_to_get.json()],
                     vec![coordinate_type__tag.json(), coordinate_tag.json()],
                 );
@@ -3220,7 +3296,7 @@ impl SetVariable {
                 tag_name,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item_to_change.json(), tag_name.json()],
                     vec![],
                 );
@@ -3240,7 +3316,7 @@ impl SetVariable {
                 size_variation_,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), effect_to.json(), particle_size.json(),
                         size_variation_.json()
@@ -3258,7 +3334,7 @@ impl SetVariable {
             }
             SetVariable::GetPotionEffectDuration { variable_to_set, potion_to_get } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), potion_to_get.json()],
                     vec![],
                 );
@@ -3277,7 +3353,7 @@ impl SetVariable {
                 location_2,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), location_1.json(), location_2.json()],
                     vec![],
                 );
@@ -3296,7 +3372,7 @@ impl SetVariable {
                 sound_name_eg_rabbit_eat,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), sound_to_change.json(),
                         sound_name_eg_rabbit_eat.json()
@@ -3317,7 +3393,7 @@ impl SetVariable {
                 compass_to_get_lodestone,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), compass_to_get_lodestone.json()],
                     vec![],
                 );
@@ -3332,7 +3408,7 @@ impl SetVariable {
             }
             SetVariable::ShiftDirection { direction_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![direction_tag.json()]);
+                let item_args = compile(vec![], vec![direction_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -3344,7 +3420,7 @@ impl SetVariable {
             }
             SetVariable::GetContainerNameN {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -3360,7 +3436,7 @@ impl SetVariable {
                 spread_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), effect_to_get.json()],
                     vec![spread_tag.json()],
                 );
@@ -3379,7 +3455,7 @@ impl SetVariable {
                 surface_vector,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), vector_to_reflect.json(), surface_vector
                         .json()
@@ -3401,7 +3477,7 @@ impl SetVariable {
                 text_value_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), head_to_get_owner_of.json()],
                     vec![text_value_tag.json()],
                 );
@@ -3416,7 +3492,7 @@ impl SetVariable {
             }
             SetVariable::GetItemEnchants {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -3428,7 +3504,7 @@ impl SetVariable {
             }
             SetVariable::AppendDictionary { dictionary_to, dictionary } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![dictionary_to.json(), dictionary.json()],
                     vec![],
                 );
@@ -3446,7 +3522,7 @@ impl SetVariable {
                 item_to_get_maximum_stack,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item_to_get_maximum_stack.json()],
                     vec![],
                 );
@@ -3465,7 +3541,7 @@ impl SetVariable {
                 color_channels_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), color_hexadecimal.json()],
                     vec![color_channels_tag.json()],
                 );
@@ -3484,7 +3560,7 @@ impl SetVariable {
                 direction,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), location_to_change.json(), direction
                         .json()
@@ -3502,7 +3578,7 @@ impl SetVariable {
             }
             SetVariable::SetListValue { list_to_change, index, value_to_set } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![list_to_change.json(), index.json(), value_to_set.json()],
                     vec![],
                 );
@@ -3521,7 +3597,7 @@ impl SetVariable {
                 enchantments,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), item_to_change.json(), enchantments
                         .json()
@@ -3539,7 +3615,7 @@ impl SetVariable {
             }
             SetVariable::SetBookText { variable_to_set, book, pages, page_number } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), book.json(), pages.json(), page_number
                         .json()
@@ -3557,7 +3633,7 @@ impl SetVariable {
             }
             SetVariable::SettoRandomValue { variable_to_set, value_set } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), value_set.json()],
                     vec![],
                 );
@@ -3576,7 +3652,7 @@ impl SetVariable {
                 material,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item_to_change.json(), material.json()],
                     vec![],
                 );
@@ -3591,7 +3667,7 @@ impl SetVariable {
             }
             SetVariable::GetSoundType { variable_to_set, sound_to_get_type__of } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), sound_to_get_type__of.json()],
                     vec![],
                 );
@@ -3610,7 +3686,7 @@ impl SetVariable {
                 index,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), list_to_get_value_of.json(), index.json()
                     ],
@@ -3632,7 +3708,7 @@ impl SetVariable {
                 input_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), number_input.json()],
                     vec![tangent_variant_tag.json(), input_tag.json()],
                 );
@@ -3654,7 +3730,7 @@ impl SetVariable {
                 cell_edge_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), noise_location.json(), cell_frequency
                         .json(), cell_scatter.json(), generation_seed.json()
@@ -3672,7 +3748,7 @@ impl SetVariable {
             }
             SetVariable::SetDirection { face_direction_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![face_direction_tag.json()]);
+                let item_args = compile(vec![], vec![face_direction_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -3689,7 +3765,7 @@ impl SetVariable {
                 brightness_c07c1007,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), hue_color_circle_c07c3607.json(),
                         saturation_c07c1007.json(), brightness_c07c1007.json()
@@ -3707,7 +3783,7 @@ impl SetVariable {
             }
             SetVariable::IncrementNumberEq { variable, numbers_to } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable.json(), numbers_to.json()],
                     vec![],
                 );
@@ -3725,7 +3801,7 @@ impl SetVariable {
                 sound_to_get_variant_of,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), sound_to_get_variant_of.json()],
                     vec![],
                 );
@@ -3740,7 +3816,7 @@ impl SetVariable {
             }
             SetVariable::GetItemColor { variable, item_to_get_color_of } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable.json(), item_to_get_color_of.json()],
                     vec![],
                 );
@@ -3755,7 +3831,7 @@ impl SetVariable {
             }
             SetVariable::ClearFormatting { variable_to_set, text_to_change } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), text_to_change.json()],
                     vec![],
                 );
@@ -3770,7 +3846,7 @@ impl SetVariable {
             }
             SetVariable::InsertListValue { list_to_change, index, value_to_insert } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![list_to_change.json(), index.json(), value_to_insert.json()],
                     vec![],
                 );
@@ -3785,7 +3861,7 @@ impl SetVariable {
             }
             SetVariable::SetSoundVolume { variable_to_set, sound_to_change, volume } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), sound_to_change.json(), volume.json()],
                     vec![],
                 );
@@ -3806,7 +3882,7 @@ impl SetVariable {
                 coordinate_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), location_to_change.json(), coordinate
                         .json()
@@ -3824,7 +3900,7 @@ impl SetVariable {
             }
             SetVariable::AddVectors { variable_to_set, vectors_to_add } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), vectors_to_add.json()],
                     vec![],
                 );
@@ -3839,7 +3915,7 @@ impl SetVariable {
             }
             SetVariable::SetPitch {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -3854,7 +3930,7 @@ impl SetVariable {
                 fluid_collision_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![ignore_passable_blocks_tag.json(), fluid_collision_tag.json()],
                 );
@@ -3872,7 +3948,7 @@ impl SetVariable {
                 item_to_get_enchantments_from,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item_to_get_enchantments_from.json()],
                     vec![],
                 );
@@ -3891,7 +3967,7 @@ impl SetVariable {
                 owner_name_uuid_or,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), player_head.json(), owner_name_uuid_or
                         .json()
@@ -3918,7 +3994,7 @@ impl SetVariable {
                 fractal_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), noise_location.json(), frequency_scale
                         .json(), octaves_perlin_layers.json(), octave_frequency_gain
@@ -3945,7 +4021,7 @@ impl SetVariable {
                 distance_calculation_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), noise_location.json(), cell_frequency
                         .json(), cell_scatter.json(), generation_seed.json()
@@ -3967,7 +4043,7 @@ impl SetVariable {
                 color_hexadecimal,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), item_to_change.json(), color_hexadecimal
                         .json()
@@ -3985,7 +4061,7 @@ impl SetVariable {
             }
             SetVariable::GetParticleEffectColor { variable_to_set, effect_to_get } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), effect_to_get.json()],
                     vec![],
                 );
@@ -4000,7 +4076,7 @@ impl SetVariable {
             }
             SetVariable::SetSoundPitch { variable_to_set, sound_to_change, pitch } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), sound_to_change.json(), pitch.json()],
                     vec![],
                 );
@@ -4020,7 +4096,7 @@ impl SetVariable {
                 round_mode_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), number_to_round.json(), round_multiple
                         .json()
@@ -4038,7 +4114,7 @@ impl SetVariable {
             }
             SetVariable::GetPlaceableBlocks { variable_to_set, item } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item.json()],
                     vec![],
                 );
@@ -4053,7 +4129,7 @@ impl SetVariable {
             }
             SetVariable::SortList { variable_to_set, list_to_sort, sort_order_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), list_to_sort.json()],
                     vec![sort_order_tag.json()],
                 );
@@ -4072,7 +4148,7 @@ impl SetVariable {
                 sound_key,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), sound_to_change.json(), sound_key.json()
                     ],
@@ -4093,7 +4169,7 @@ impl SetVariable {
                 expected_values,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         dictionary_to_change.json(), key_to_remove.json(),
                         expected_values.json()
@@ -4116,7 +4192,7 @@ impl SetVariable {
                 format_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), time_to_format.json(), custom_format
                         .json()
@@ -4145,7 +4221,7 @@ impl SetVariable {
                 hide_potion_effects_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item.json()],
                     vec![
                         hide_armor_trim_tag.json(), hide_color_tag.json(),
@@ -4165,7 +4241,7 @@ impl SetVariable {
             }
             SetVariable::GetStringLength { variable_to_set, string_to_measure } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), string_to_measure.json()],
                     vec![],
                 );
@@ -4183,7 +4259,7 @@ impl SetVariable {
                 item_to_get_effects_from,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item_to_get_effects_from.json()],
                     vec![],
                 );
@@ -4198,7 +4274,7 @@ impl SetVariable {
             }
             SetVariable::GetMiniMessageExpression { variable_to_set, text_to_read } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), text_to_read.json()],
                     vec![],
                 );
@@ -4213,7 +4289,7 @@ impl SetVariable {
             }
             SetVariable::SetYaw {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -4229,7 +4305,7 @@ impl SetVariable {
                 item_effects,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), item_to_change.json(), item_effects
                         .json()
@@ -4247,7 +4323,7 @@ impl SetVariable {
             }
             SetVariable::DecrementNumberEq { variable, numbers_to } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable.json(), numbers_to.json()],
                     vec![],
                 );
@@ -4266,7 +4342,7 @@ impl SetVariable {
                 tag_name,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), item_to_get_tag_of.json(), tag_name
                         .json()
@@ -4284,7 +4360,7 @@ impl SetVariable {
             }
             SetVariable::CreateList { variable_to_set, value_list } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), value_list.json()],
                     vec![],
                 );
@@ -4299,7 +4375,7 @@ impl SetVariable {
             }
             SetVariable::AppendListtoList { list_to_append_to, lists_to_append } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![list_to_append_to.json(), lists_to_append.json()],
                     vec![],
                 );
@@ -4318,7 +4394,7 @@ impl SetVariable {
                 ignore_empty_slots_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), container_location.json()],
                     vec![ignore_empty_slots_tag.json()],
                 );
@@ -4338,7 +4414,7 @@ impl SetVariable {
                 shift_distance,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), location_to_shift.json(), target_location
                         .json(), shift_distance.json()
@@ -4361,7 +4437,7 @@ impl SetVariable {
                 end_index,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), list_to_trim.json(), start_index.json(),
                         end_index.json()
@@ -4384,7 +4460,7 @@ impl SetVariable {
                 input_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), number_input.json()],
                     vec![cosine_variant_tag.json(), input_tag.json()],
                 );
@@ -4404,7 +4480,7 @@ impl SetVariable {
                 component_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), vector_to_change.json(), component.json()
                     ],
@@ -4424,7 +4500,7 @@ impl SetVariable {
                 string_to_convert,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), string_to_convert.json()],
                     vec![],
                 );
@@ -4443,7 +4519,7 @@ impl SetVariable {
                 exponent,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), number_input.json(), exponent.json()],
                     vec![],
                 );
@@ -4458,7 +4534,7 @@ impl SetVariable {
             }
             SetVariable::ShiftAllDirs { ignore_pitch_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![ignore_pitch_tag.json()]);
+                let item_args = compile(vec![], vec![ignore_pitch_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -4475,7 +4551,7 @@ impl SetVariable {
                 search_order_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), list_to_search_in.json(), value_to_search
                         .json()
@@ -4497,7 +4573,7 @@ impl SetVariable {
                 enchantment_name,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), item_to_change.json(), enchantment_name
                         .json()
@@ -4515,7 +4591,7 @@ impl SetVariable {
             }
             SetVariable::GetBookTextN {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -4531,7 +4607,7 @@ impl SetVariable {
                 particle_roll,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), effect_to.json(), particle_roll.json()],
                     vec![],
                 );
@@ -4550,7 +4626,7 @@ impl SetVariable {
                 variant_id_eg_break1,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), sound_to_change.json(),
                         variant_id_eg_break1.json()
@@ -4568,7 +4644,7 @@ impl SetVariable {
             }
             SetVariable::ShiftLocation { shift_direction_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![shift_direction_tag.json()]);
+                let item_args = compile(vec![], vec![shift_direction_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -4580,7 +4656,7 @@ impl SetVariable {
             }
             SetVariable::RandomizeList { variable_to_set, list_to_randomize } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), list_to_randomize.json()],
                     vec![],
                 );
@@ -4600,7 +4676,7 @@ impl SetVariable {
                 maximum,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), number_to_clamp.json(), minimum.json(),
                         maximum.json()
@@ -4618,7 +4694,7 @@ impl SetVariable {
             }
             SetVariable::Round { round_mode_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![round_mode_tag.json()]);
+                let item_args = compile(vec![], vec![round_mode_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -4634,7 +4710,7 @@ impl SetVariable {
                 return_value_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), sound_to_get_pitch_or.json()],
                     vec![return_value_type__tag.json()],
                 );
@@ -4649,7 +4725,7 @@ impl SetVariable {
             }
             SetVariable::TranslateColors { translation_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![translation_type__tag.json()]);
+                let item_args = compile(vec![], vec![translation_type__tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -4665,7 +4741,7 @@ impl SetVariable {
                 growth_unit_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), block_location.json()],
                     vec![growth_unit_tag.json()],
                 );
@@ -4683,7 +4759,7 @@ impl SetVariable {
                 item_to_get_tags_from,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), item_to_get_tags_from.json()],
                     vec![],
                 );
@@ -4698,7 +4774,7 @@ impl SetVariable {
             }
             SetVariable::RemoveListValue { list_to_change, values_to } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![list_to_change.json(), values_to.json()],
                     vec![],
                 );
@@ -4719,7 +4795,7 @@ impl SetVariable {
                 sideways_change_l__r,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), location_to_shift.json(), forwards_change
                         .json(), upwards_change.json(), sideways_change_l__r.json()
@@ -4741,7 +4817,7 @@ impl SetVariable {
                 placeable_blocks,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), item_to_change.json(), placeable_blocks
                         .json()
@@ -4763,7 +4839,7 @@ impl SetVariable {
                 return_value_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), block_location.json()],
                     vec![return_value_type__tag.json()],
                 );
@@ -4778,7 +4854,7 @@ impl SetVariable {
             }
             SetVariable::ParsePitch {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -4790,7 +4866,7 @@ impl SetVariable {
             }
             SetVariable::GetDictionaryValue { variable_to_set, dictionary_to, key } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), dictionary_to.json(), key.json()],
                     vec![],
                 );
@@ -4805,7 +4881,7 @@ impl SetVariable {
             }
             SetVariable::GetContainerLock { variable_to_set, container_location } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), container_location.json()],
                     vec![],
                 );
@@ -4820,7 +4896,7 @@ impl SetVariable {
             }
             SetVariable::GetBlockPower { variable_to_set, block_location } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), block_location.json()],
                     vec![],
                 );
@@ -4839,7 +4915,7 @@ impl SetVariable {
                 length_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), vector_to_get.json()],
                     vec![length_type__tag.json()],
                 );
@@ -4858,7 +4934,7 @@ impl SetVariable {
                 model_value,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         variable_to_set.json(), item_to_change.json(), model_value.json()
                     ],
@@ -4875,7 +4951,7 @@ impl SetVariable {
             }
             SetVariable::SetCoords {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -4887,7 +4963,7 @@ impl SetVariable {
             }
             SetVariable::GetParticleEffectSize { variable_to_set, effect_to_get } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), effect_to_get.json()],
                     vec![],
                 );

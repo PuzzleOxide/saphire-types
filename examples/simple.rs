@@ -12,7 +12,7 @@ fn main() -> () {
         },
         B::PlayerAction {
             action: PlayerAction::SendMessage {
-                message_to_send:vec![MiniMessage{value:"Hello World".to_string()}],
+                message_to_send:vec![MiniMessage::Literal(MiniMessageLiteral::new("Hello World".to_string()))],
                 alignment_mode_tag: Default::default(),
                 inherit_styles_tag: Default::default(),
                 text_value_merging_tag: Default::default(),

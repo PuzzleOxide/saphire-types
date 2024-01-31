@@ -42,7 +42,7 @@ pub enum IfVariable {
         maximum_value: AnyType,
         location_handling_tag: LocationHandlingValueIsWithinRange,
     },
-    VariableExists { variable_to_check: Variable },
+    VariableExists { variable_to_check: VariableLiteral },
     LegacyEq {},
     ItemEquals {
         item_to_check: Item,
@@ -84,7 +84,7 @@ impl IfVariable {
         match self {
             IfVariable::Number { number_to_check, number_to_compare_to } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![number_to_check.json(), number_to_compare_to.json()],
                     vec![],
                 );
@@ -103,7 +103,7 @@ impl IfVariable {
                 values_to,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         dictionary_to_check.json(), key_to_check.json(), values_to.json()
                     ],
@@ -120,7 +120,7 @@ impl IfVariable {
             }
             IfVariable::ItemHasCustomTag { item_to_check, tag_name, tag_value } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![item_to_check.json(), tag_name.json(), tag_value.json()],
                     vec![],
                 );
@@ -140,7 +140,7 @@ impl IfVariable {
                 ignore_case_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         string_or_source_expression_to_match.json(), string_to_compare
                         .json()
@@ -162,7 +162,7 @@ impl IfVariable {
                 ignore_case_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![string_to_check.json(), string_to_start_with.json()],
                     vec![ignore_case_tag.json()],
                 );
@@ -181,7 +181,7 @@ impl IfVariable {
                 variable_to,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         list_to_check_in.json(), index_to_check_at.json(), variable_to
                         .json()
@@ -199,7 +199,7 @@ impl IfVariable {
             }
             IfVariable::ValueIsType { value_to_check, variable_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![value_to_check.json()],
                     vec![variable_type__tag.json()],
                 );
@@ -214,7 +214,7 @@ impl IfVariable {
             }
             IfVariable::TextMatches { regular_expressions_tag, ignore_case_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![regular_expressions_tag.json(), ignore_case_tag.json()],
                 );
@@ -229,7 +229,7 @@ impl IfVariable {
             }
             IfVariable::IsNear {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -246,7 +246,7 @@ impl IfVariable {
                 location_handling_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![check_value.json(), minimum_value.json(), maximum_value.json()],
                     vec![location_handling_tag.json()],
                 );
@@ -261,7 +261,7 @@ impl IfVariable {
             }
             IfVariable::VariableExists { variable_to_check } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![variable_to_check.json()], vec![]);
+                let item_args = compile(vec![variable_to_check.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -273,7 +273,7 @@ impl IfVariable {
             }
             IfVariable::LegacyEq {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -289,7 +289,7 @@ impl IfVariable {
                 comparison_mode_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![item_to_check.json(), items_to_compare_to.json()],
                     vec![comparison_mode_tag.json()],
                 );
@@ -308,7 +308,7 @@ impl IfVariable {
                 check_mode_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![list_to_check_in.json(), value_to_find.json()],
                     vec![check_mode_tag.json()],
                 );
@@ -323,7 +323,7 @@ impl IfVariable {
             }
             IfVariable::LegacyEqN {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -335,7 +335,7 @@ impl IfVariable {
             }
             IfVariable::InRange {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -352,7 +352,7 @@ impl IfVariable {
                 shape_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![location_to_check.json(), locations_to.json(), radius.json()],
                     vec![shape_tag.json()],
                 );
@@ -371,7 +371,7 @@ impl IfVariable {
                 ignore_case_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![string_to_check.json(), string_to_check_for.json()],
                     vec![ignore_case_tag.json()],
                 );
@@ -386,7 +386,7 @@ impl IfVariable {
             }
             IfVariable::ValueEq { value_to_check, values_to_compare_to } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![value_to_check.json(), values_to_compare_to.json()],
                     vec![],
                 );
@@ -401,7 +401,7 @@ impl IfVariable {
             }
             IfVariable::NumberLessThan { number_to_check, number_to_compare_to } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![number_to_check.json(), number_to_compare_to.json()],
                     vec![],
                 );
@@ -416,7 +416,7 @@ impl IfVariable {
             }
             IfVariable::Eq { value_to_check, values_to_compare_to } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![value_to_check.json(), values_to_compare_to.json()],
                     vec![],
                 );
@@ -431,7 +431,7 @@ impl IfVariable {
             }
             IfVariable::NumberGreaterThan { number_to_check, number_to_compare_to } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![number_to_check.json(), number_to_compare_to.json()],
                     vec![],
                 );
@@ -450,7 +450,7 @@ impl IfVariable {
                 ignore_case_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![string_to_check.json(), string_to_end_with.json()],
                     vec![ignore_case_tag.json()],
                 );
@@ -465,7 +465,7 @@ impl IfVariable {
             }
             IfVariable::GreaterThanEq { number_to_check, number_to_compare_to } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![number_to_check.json(), number_to_compare_to.json()],
                     vec![],
                 );
@@ -480,7 +480,7 @@ impl IfVariable {
             }
             IfVariable::DictionaryHasKey { dictionary_to_check, key_to_look_for } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![dictionary_to_check.json(), key_to_look_for.json()],
                     vec![],
                 );

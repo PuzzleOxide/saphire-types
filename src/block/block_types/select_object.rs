@@ -21,7 +21,7 @@ pub enum SelectObject {
         compare_mode_tag: CompareModeFilterSelectionbyDistance,
     },
     FilterSelectionbyRaycast {
-        gets_the_end_or: Option<Variable>,
+        gets_the_end_or: Option<VariableLiteral>,
         ray_origin: Location,
         ray_distance: Number,
         ray_width: Option<Number>,
@@ -53,7 +53,7 @@ impl SelectObject {
         match self {
             SelectObject::LastMob {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -65,7 +65,7 @@ impl SelectObject {
             }
             SelectObject::SelectRandomPlayer { selection_size } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![selection_size.json()], vec![]);
+                let item_args = compile(vec![selection_size.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -77,7 +77,7 @@ impl SelectObject {
             }
             SelectObject::SelectLastSpawnedEntity {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -89,7 +89,7 @@ impl SelectObject {
             }
             SelectObject::Shooter {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -101,7 +101,7 @@ impl SelectObject {
             }
             SelectObject::AllMobs {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -113,7 +113,7 @@ impl SelectObject {
             }
             SelectObject::SelectEntitiesbyName { uuid_to_check_for } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![uuid_to_check_for.json()], vec![]);
+                let item_args = compile(vec![uuid_to_check_for.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -125,7 +125,7 @@ impl SelectObject {
             }
             SelectObject::FilterSelectionRandomly { selection_size } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![selection_size.json()], vec![]);
+                let item_args = compile(vec![selection_size.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -137,7 +137,7 @@ impl SelectObject {
             }
             SelectObject::DefaultEntity {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -149,7 +149,7 @@ impl SelectObject {
             }
             SelectObject::SelectPlayersbyName { name_or_uuid } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![name_or_uuid.json()], vec![]);
+                let item_args = compile(vec![name_or_uuid.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -161,7 +161,7 @@ impl SelectObject {
             }
             SelectObject::SelectAllEntities {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -173,7 +173,7 @@ impl SelectObject {
             }
             SelectObject::Damager {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -190,7 +190,7 @@ impl SelectObject {
                 compare_mode_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![location_to.json(), selection_size.json()],
                     vec![ignore_yaxis_tag.json(), compare_mode_tag.json()],
                 );
@@ -212,7 +212,7 @@ impl SelectObject {
                 block_collision_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         gets_the_end_or.json(), ray_origin.json(), ray_distance.json(),
                         ray_width.json(), selection_size.json()
@@ -230,7 +230,7 @@ impl SelectObject {
             }
             SelectObject::ResetSelection {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -242,7 +242,7 @@ impl SelectObject {
             }
             SelectObject::SelectEventTarget { event_target_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![event_target_tag.json()]);
+                let item_args = compile(vec![], vec![event_target_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -254,7 +254,7 @@ impl SelectObject {
             }
             SelectObject::Killer {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -266,7 +266,7 @@ impl SelectObject {
             }
             SelectObject::Victim {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -278,7 +278,7 @@ impl SelectObject {
             }
             SelectObject::SelectEntitiesbyCondition { subaction } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -294,12 +294,11 @@ impl SelectObject {
                         "action".to_string(),
                         serde_json::Value::String("EntitiesCond".to_string()),
                     );
-                drop(value);
                 subaction
             }
             SelectObject::SelectAllPlayers {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -311,7 +310,7 @@ impl SelectObject {
             }
             SelectObject::InvertSelection {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -323,7 +322,7 @@ impl SelectObject {
             }
             SelectObject::RandomEntity {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -335,7 +334,7 @@ impl SelectObject {
             }
             SelectObject::FilterSelectionbyCondition { subaction } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -351,12 +350,11 @@ impl SelectObject {
                         "action".to_string(),
                         serde_json::Value::String("FilterCondition".to_string()),
                     );
-                drop(value);
                 subaction
             }
             SelectObject::MobsCond { subaction } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -372,7 +370,6 @@ impl SelectObject {
                         "action".to_string(),
                         serde_json::Value::String("MobsCond".to_string()),
                     );
-                drop(value);
                 subaction
             }
             SelectObject::FilterSelectionbySort {
@@ -381,7 +378,7 @@ impl SelectObject {
                 sort_order_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![value_to.json(), selection_size.json()],
                     vec![sort_order_tag.json()],
                 );
@@ -396,7 +393,7 @@ impl SelectObject {
             }
             SelectObject::Projectile {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -408,7 +405,7 @@ impl SelectObject {
             }
             SelectObject::DefaultPlayer {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -420,7 +417,7 @@ impl SelectObject {
             }
             SelectObject::SelectPlayersbyCondition { subaction } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -436,12 +433,11 @@ impl SelectObject {
                         "action".to_string(),
                         serde_json::Value::String("PlayersCond".to_string()),
                     );
-                drop(value);
                 subaction
             }
             SelectObject::MobName {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(

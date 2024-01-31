@@ -4,33 +4,33 @@ use crate::types::*;
 use crate::block::block_types::subactions::*;
 pub enum Repeat {
     RepeatAdjacently {
-        gets_the_current: Variable,
+        gets_the_current: VariableLiteral,
         center_block: Location,
         change_location_rotation_tag: ChangeLocationRotationRepeatAdjacently,
         include_origin_block_tag: IncludeOriginBlockRepeatAdjacently,
         pattern_tag: PatternRepeatAdjacently,
     },
     RepeatOnPath {
-        gets_the_current: Variable,
+        gets_the_current: VariableLiteral,
         path_locations: Vec<Location>,
         point_spacing: Option<Number>,
         rotate_location_tag: RotateLocationRepeatOnPath,
     },
-    RepeatMultipleTimes { gets_the: Option<Variable>, amount: Number },
+    RepeatMultipleTimes { gets_the: Option<VariableLiteral>, amount: Number },
     RepeatOnGrid {
-        gets_the_current: Variable,
+        gets_the_current: VariableLiteral,
         start_of_region: Location,
         end_of_region: Location,
     },
     RepeatWhile { subaction: AllSubactions },
     Range {},
     RepeatForEachinList {
-        gets_the_current: Variable,
+        gets_the_current: VariableLiteral,
         list_to_repeat_through: List,
         allow_list_changes_tag: AllowListChangesRepeatForEachinList,
     },
     RepeatOnSphere {
-        gets_the_current: Variable,
+        gets_the_current: VariableLiteral,
         sphere_center: Location,
         sphere_radius: Number,
         sphere_points: Option<Number>,
@@ -38,14 +38,14 @@ pub enum Repeat {
     },
     RepeatForever {},
     RepeatOnRange {
-        gets_the_current: Option<Variable>,
+        gets_the_current: Option<VariableLiteral>,
         start_of_range: Number,
         end_of_range: Number,
         step: Option<Number>,
     },
     RepeatForEachDictionaryEntry {
-        gets_the_current_bkey: Variable,
-        gets_the_current_xffd47fvalue: Variable,
+        gets_the_current_bkey: VariableLiteral,
+        gets_the_current_xffd47fvalue: VariableLiteral,
         dictionary_to: Dict,
     },
 }
@@ -60,7 +60,7 @@ impl Repeat {
                 pattern_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![gets_the_current.json(), center_block.json()],
                     vec![
                         change_location_rotation_tag.json(), include_origin_block_tag
@@ -83,7 +83,7 @@ impl Repeat {
                 rotate_location_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         gets_the_current.json(), path_locations.json(), point_spacing
                         .json()
@@ -101,10 +101,7 @@ impl Repeat {
             }
             Repeat::RepeatMultipleTimes { gets_the, amount } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
-                    vec![gets_the.json(), amount.json()],
-                    vec![],
-                );
+                let item_args = compile(vec![gets_the.json(), amount.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -120,7 +117,7 @@ impl Repeat {
                 end_of_region,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         gets_the_current.json(), start_of_region.json(), end_of_region
                         .json()
@@ -138,7 +135,7 @@ impl Repeat {
             }
             Repeat::RepeatWhile { subaction } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -154,12 +151,11 @@ impl Repeat {
                         "action".to_string(),
                         serde_json::Value::String("While".to_string()),
                     );
-                drop(value);
                 subaction
             }
             Repeat::Range {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -175,7 +171,7 @@ impl Repeat {
                 allow_list_changes_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![gets_the_current.json(), list_to_repeat_through.json()],
                     vec![allow_list_changes_tag.json()],
                 );
@@ -196,7 +192,7 @@ impl Repeat {
                 point_locations_inwards_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         gets_the_current.json(), sphere_center.json(), sphere_radius
                         .json(), sphere_points.json()
@@ -214,7 +210,7 @@ impl Repeat {
             }
             Repeat::RepeatForever {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -231,7 +227,7 @@ impl Repeat {
                 step,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         gets_the_current.json(), start_of_range.json(), end_of_range
                         .json(), step.json()
@@ -253,7 +249,7 @@ impl Repeat {
                 dictionary_to,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         gets_the_current_bkey.json(), gets_the_current_xffd47fvalue
                         .json(), dictionary_to.json()

@@ -157,7 +157,7 @@ pub enum EntityAction {
     SetDisplayGlowColor { color_hexadecimal: Option<Text> },
     SetVisualFire { on_fire_tag: OnFireSetVisualFire },
     SetAgeSize {},
-    GetCustomTag { variable_to_set: Variable, tag_name: Text },
+    GetCustomTag { variable_to_set: VariableLiteral, tag_name: Text },
     SetInteractionSize { width: Option<Number>, height: Option<Number> },
     LSetArmor {},
     SetCatType { skin_type__tag: SkinTypeSetCatType },
@@ -286,7 +286,7 @@ impl EntityAction {
                 rotation_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         pitch_c07c3607.json(), yaw_c07c3607.json(), roll_c07c3607.json()
                     ],
@@ -303,7 +303,7 @@ impl EntityAction {
             }
             EntityAction::SetParrotColor { parrot_color_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![parrot_color_tag.json()]);
+                let item_args = compile(vec![], vec![parrot_color_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -319,7 +319,7 @@ impl EntityAction {
                 z_translation,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         x_translation.json(), y_translation.json(), z_translation.json()
                     ],
@@ -336,7 +336,7 @@ impl EntityAction {
             }
             EntityAction::Remove {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -348,7 +348,7 @@ impl EntityAction {
             }
             EntityAction::SetVelocity { new_velocity, add_to_current_velocity_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![new_velocity.json()],
                     vec![add_to_current_velocity_tag.json()],
                 );
@@ -366,7 +366,7 @@ impl EntityAction {
                 opacity_in_percentage,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![color_hexadecimal.json(), opacity_in_percentage.json()],
                     vec![],
                 );
@@ -381,7 +381,7 @@ impl EntityAction {
             }
             EntityAction::SetDisplayCullingSize { width, height } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![width.json(), height.json()], vec![]);
+                let item_args = compile(vec![width.json(), height.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -393,7 +393,7 @@ impl EntityAction {
             }
             EntityAction::SetGlowSquidDarkTicks { ticks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![ticks.json()], vec![]);
+                let item_args = compile(vec![ticks.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -405,7 +405,7 @@ impl EntityAction {
             }
             EntityAction::HideName {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -417,7 +417,7 @@ impl EntityAction {
             }
             EntityAction::SetFrogType { frog_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![frog_type__tag.json()]);
+                let item_args = compile(vec![], vec![frog_type__tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -433,7 +433,7 @@ impl EntityAction {
                 rotation_type__tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![axis_vector.json(), angle_c07c3607.json()],
                     vec![rotation_type__tag.json()],
                 );
@@ -448,7 +448,7 @@ impl EntityAction {
             }
             EntityAction::Damage { damage_to_inflict, uuid_of_damager_entity } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![damage_to_inflict.json(), uuid_of_damager_entity.json()],
                     vec![],
                 );
@@ -463,7 +463,7 @@ impl EntityAction {
             }
             EntityAction::SetSheepSheared { sheared_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![sheared_tag.json()]);
+                let item_args = compile(vec![], vec![sheared_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -475,7 +475,7 @@ impl EntityAction {
             }
             EntityAction::SetSitting { is_sitting_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![is_sitting_tag.json()]);
+                let item_args = compile(vec![], vec![is_sitting_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -487,7 +487,7 @@ impl EntityAction {
             }
             EntityAction::SetAxolotlPattern { axolotl_color_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![axolotl_color_tag.json()]);
+                let item_args = compile(vec![], vec![axolotl_color_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -499,7 +499,7 @@ impl EntityAction {
             }
             EntityAction::SendMobAnimation { animation_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![animation_type__tag.json()]);
+                let item_args = compile(vec![], vec![animation_type__tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -511,7 +511,7 @@ impl EntityAction {
             }
             EntityAction::DisableGlowing {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -523,7 +523,7 @@ impl EntityAction {
             }
             EntityAction::SetWardenAngerLevel { anger_level, entity_name } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![anger_level.json(), entity_name.json()],
                     vec![],
                 );
@@ -538,7 +538,7 @@ impl EntityAction {
             }
             EntityAction::SetHorsePattern { horse_color_tag, horse_markings_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![horse_color_tag.json(), horse_markings_tag.json()],
                 );
@@ -553,7 +553,7 @@ impl EntityAction {
             }
             EntityAction::Heal { amount_to_heal } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![amount_to_heal.json()], vec![]);
+                let item_args = compile(vec![amount_to_heal.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -565,7 +565,7 @@ impl EntityAction {
             }
             EntityAction::SetAI { ai_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![ai_tag.json()]);
+                let item_args = compile(vec![], vec![ai_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -577,7 +577,7 @@ impl EntityAction {
             }
             EntityAction::SetRiptiding { riptiding_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![riptiding_tag.json()]);
+                let item_args = compile(vec![], vec![riptiding_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -589,7 +589,7 @@ impl EntityAction {
             }
             EntityAction::SetProjectileShooter { shooter_uuid } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![shooter_uuid.json()], vec![]);
+                let item_args = compile(vec![shooter_uuid.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -601,7 +601,7 @@ impl EntityAction {
             }
             EntityAction::SetFoxLeaping { leaping_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![leaping_tag.json()]);
+                let item_args = compile(vec![], vec![leaping_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -613,7 +613,7 @@ impl EntityAction {
             }
             EntityAction::SetItemOwner {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -625,7 +625,7 @@ impl EntityAction {
             }
             EntityAction::SetPandaGene { set_gene_tag, gene_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![set_gene_tag.json(), gene_type__tag.json()],
                 );
@@ -640,7 +640,7 @@ impl EntityAction {
             }
             EntityAction::SetDyeColor { dye_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![dye_tag.json()]);
+                let item_args = compile(vec![], vec![dye_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -652,7 +652,7 @@ impl EntityAction {
             }
             EntityAction::LaunchUp { launch_power, add_to_current_velocity_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![launch_power.json()],
                     vec![add_to_current_velocity_tag.json()],
                 );
@@ -670,7 +670,7 @@ impl EntityAction {
                 heal_mob_to_max_health_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![maximum_health.json()],
                     vec![heal_mob_to_max_health_tag.json()],
                 );
@@ -685,7 +685,7 @@ impl EntityAction {
             }
             EntityAction::SetAnimalAge { age, age_lock_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![age.json()], vec![age_lock_tag.json()]);
+                let item_args = compile(vec![age.json()], vec![age_lock_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -697,7 +697,7 @@ impl EntityAction {
             }
             EntityAction::SetFishingWaitTime { wait_time_ticks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![wait_time_ticks.json()], vec![]);
+                let item_args = compile(vec![wait_time_ticks.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -709,7 +709,7 @@ impl EntityAction {
             }
             EntityAction::SetEndCrystalBeam { target } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![target.json()], vec![]);
+                let item_args = compile(vec![target.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -721,7 +721,7 @@ impl EntityAction {
             }
             EntityAction::EatTarget { target_uuid } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![target_uuid.json()], vec![]);
+                let item_args = compile(vec![target_uuid.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -736,7 +736,7 @@ impl EntityAction {
                 sky_light_level_c07c157,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         block_light_level_c07c157.json(), sky_light_level_c07c157.json()
                     ],
@@ -753,7 +753,7 @@ impl EntityAction {
             }
             EntityAction::SetVillagerProfession { profession_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![profession_tag.json()]);
+                let item_args = compile(vec![], vec![profession_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -765,7 +765,7 @@ impl EntityAction {
             }
             EntityAction::NoGravity {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -777,7 +777,7 @@ impl EntityAction {
             }
             EntityAction::SetArmsRaised { arms_raised_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![arms_raised_tag.json()]);
+                let item_args = compile(vec![], vec![arms_raised_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -789,7 +789,7 @@ impl EntityAction {
             }
             EntityAction::ClearPotionEffects {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -801,7 +801,7 @@ impl EntityAction {
             }
             EntityAction::SetArmorStandParts { arms_tag, base_plate_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![arms_tag.json(), base_plate_tag.json()],
                 );
@@ -816,7 +816,7 @@ impl EntityAction {
             }
             EntityAction::SetInvulnerable { invulnerable_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![invulnerable_tag.json()]);
+                let item_args = compile(vec![], vec![invulnerable_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -828,7 +828,7 @@ impl EntityAction {
             }
             EntityAction::ProjColl {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -848,7 +848,7 @@ impl EntityAction {
                 has_base_plate_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![
                         is_visible_tag.json(), is_marker_no_hitbox_tag.json(),
@@ -868,7 +868,7 @@ impl EntityAction {
             }
             EntityAction::SetPickupDelay { delay } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![delay.json()], vec![]);
+                let item_args = compile(vec![delay.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -880,7 +880,7 @@ impl EntityAction {
             }
             EntityAction::SetTarget { target_uuid } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![target_uuid.json()], vec![]);
+                let item_args = compile(vec![target_uuid.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -892,7 +892,7 @@ impl EntityAction {
             }
             EntityAction::DropItems {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -904,7 +904,7 @@ impl EntityAction {
             }
             EntityAction::SetTextDisplayTextShadow { text_shadow_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![text_shadow_tag.json()]);
+                let item_args = compile(vec![], vec![text_shadow_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -916,7 +916,7 @@ impl EntityAction {
             }
             EntityAction::SetCreeperExplosionPower { power_c07c257 } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![power_c07c257.json()], vec![]);
+                let item_args = compile(vec![power_c07c257.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -928,7 +928,7 @@ impl EntityAction {
             }
             EntityAction::SetMarker { marker_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![marker_tag.json()]);
+                let item_args = compile(vec![], vec![marker_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -940,7 +940,7 @@ impl EntityAction {
             }
             EntityAction::RemoveCustomTag { tag_name } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![tag_name.json()], vec![]);
+                let item_args = compile(vec![tag_name.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -952,7 +952,7 @@ impl EntityAction {
             }
             EntityAction::SetNameVisible { name_tag_visible_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![name_tag_visible_tag.json()]);
+                let item_args = compile(vec![], vec![name_tag_visible_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -964,7 +964,7 @@ impl EntityAction {
             }
             EntityAction::SetInvulnerabilityTicks { ticks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![ticks.json()], vec![]);
+                let item_args = compile(vec![ticks.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -976,7 +976,7 @@ impl EntityAction {
             }
             EntityAction::SetAbsorptionHealth { absorption_health } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![absorption_health.json()], vec![]);
+                let item_args = compile(vec![absorption_health.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -988,7 +988,7 @@ impl EntityAction {
             }
             EntityAction::SetPose { pose_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![pose_tag.json()]);
+                let item_args = compile(vec![], vec![pose_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1000,7 +1000,7 @@ impl EntityAction {
             }
             EntityAction::SetRearing { rearing_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![rearing_tag.json()]);
+                let item_args = compile(vec![], vec![rearing_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1012,7 +1012,7 @@ impl EntityAction {
             }
             EntityAction::SetCreeperCharged { charged_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![charged_tag.json()]);
+                let item_args = compile(vec![], vec![charged_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1024,7 +1024,7 @@ impl EntityAction {
             }
             EntityAction::SetFireTicks { ticks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![ticks.json()], vec![]);
+                let item_args = compile(vec![ticks.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1036,7 +1036,7 @@ impl EntityAction {
             }
             EntityAction::SetPotionCloudRadius { radius, shrinking_speed } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![radius.json(), shrinking_speed.json()],
                     vec![],
                 );
@@ -1051,7 +1051,7 @@ impl EntityAction {
             }
             EntityAction::SetGravity { gravity_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![gravity_tag.json()]);
+                let item_args = compile(vec![], vec![gravity_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1063,7 +1063,7 @@ impl EntityAction {
             }
             EntityAction::SetCustomName { custom_name, hide_name_tag_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![custom_name.json()],
                     vec![hide_name_tag_tag.json()],
                 );
@@ -1078,7 +1078,7 @@ impl EntityAction {
             }
             EntityAction::Jump {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1090,7 +1090,7 @@ impl EntityAction {
             }
             EntityAction::SetWitherInvul { ticks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![ticks.json()], vec![]);
+                let item_args = compile(vec![ticks.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1102,7 +1102,7 @@ impl EntityAction {
             }
             EntityAction::SetBlockDisplayBlock { displayed_block, block_data } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![displayed_block.json(), block_data.json()],
                     vec![],
                 );
@@ -1117,7 +1117,7 @@ impl EntityAction {
             }
             EntityAction::SetFreezeTicks { ticks, ticking_locked_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![ticks.json()],
                     vec![ticking_locked_tag.json()],
                 );
@@ -1132,7 +1132,7 @@ impl EntityAction {
             }
             EntityAction::Silence {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1144,7 +1144,7 @@ impl EntityAction {
             }
             EntityAction::SetTextDisplaySeethrough { seethrough_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![seethrough_tag.json()]);
+                let item_args = compile(vec![], vec![seethrough_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1156,7 +1156,7 @@ impl EntityAction {
             }
             EntityAction::SetGliding { gliding_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![gliding_tag.json()]);
+                let item_args = compile(vec![], vec![gliding_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1168,7 +1168,7 @@ impl EntityAction {
             }
             EntityAction::SetRotation { pitch_90_to_90, yaw_180_to_180 } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![pitch_90_to_90.json(), yaw_180_to_180.json()],
                     vec![],
                 );
@@ -1186,7 +1186,7 @@ impl EntityAction {
                 shadow_opacity_in,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![shadow_radius_in_blocks.json(), shadow_opacity_in.json()],
                     vec![],
                 );
@@ -1201,7 +1201,7 @@ impl EntityAction {
             }
             EntityAction::SetInteractionResponsive { responsive_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![responsive_tag.json()]);
+                let item_args = compile(vec![], vec![responsive_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1213,7 +1213,7 @@ impl EntityAction {
             }
             EntityAction::UseItem { hand_tag, use_item_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![hand_tag.json(), use_item_tag.json()],
                 );
@@ -1232,7 +1232,7 @@ impl EntityAction {
                 pattern_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![
                         pattern_color_tag.json(), body_color_tag.json(), pattern_tag
@@ -1250,7 +1250,7 @@ impl EntityAction {
             }
             EntityAction::RideEntity { target_uuid } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![target_uuid.json()], vec![]);
+                let item_args = compile(vec![target_uuid.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1262,7 +1262,7 @@ impl EntityAction {
             }
             EntityAction::SetDisplayTransformationMatrix { numbers_describing } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![numbers_describing.json()], vec![]);
+                let item_args = compile(vec![numbers_describing.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1274,7 +1274,7 @@ impl EntityAction {
             }
             EntityAction::NoDrops {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1289,7 +1289,7 @@ impl EntityAction {
                 interpolation_delay,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![interpolation_duration.json(), interpolation_delay.json()],
                     vec![],
                 );
@@ -1304,7 +1304,7 @@ impl EntityAction {
             }
             EntityAction::SetSnifferState { behavior_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![behavior_tag.json()]);
+                let item_args = compile(vec![], vec![behavior_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1316,7 +1316,7 @@ impl EntityAction {
             }
             EntityAction::SetHandItem { hand_slot_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![hand_slot_tag.json()]);
+                let item_args = compile(vec![], vec![hand_slot_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1328,7 +1328,7 @@ impl EntityAction {
             }
             EntityAction::EnableGlowing {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1340,7 +1340,7 @@ impl EntityAction {
             }
             EntityAction::SetEndermanHeldBlock { block_to_hold } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![block_to_hold.json()], vec![]);
+                let item_args = compile(vec![block_to_hold.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1352,7 +1352,7 @@ impl EntityAction {
             }
             EntityAction::Teleport { new_position, keep_current_rotation_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![new_position.json()],
                     vec![keep_current_rotation_tag.json()],
                 );
@@ -1372,7 +1372,7 @@ impl EntityAction {
                 ignore_distance_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![launch_destination.json(), launch_power.json()],
                     vec![add_to_current_velocity_tag.json(), ignore_distance_tag.json()],
                 );
@@ -1387,7 +1387,7 @@ impl EntityAction {
             }
             EntityAction::SetArmorItems { armor_to_set } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![armor_to_set.json()], vec![]);
+                let item_args = compile(vec![armor_to_set.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1399,7 +1399,7 @@ impl EntityAction {
             }
             EntityAction::SetDisplayGlowColor { color_hexadecimal } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![color_hexadecimal.json()], vec![]);
+                let item_args = compile(vec![color_hexadecimal.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1411,7 +1411,7 @@ impl EntityAction {
             }
             EntityAction::SetVisualFire { on_fire_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![on_fire_tag.json()]);
+                let item_args = compile(vec![], vec![on_fire_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1423,7 +1423,7 @@ impl EntityAction {
             }
             EntityAction::SetAgeSize {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1435,7 +1435,7 @@ impl EntityAction {
             }
             EntityAction::GetCustomTag { variable_to_set, tag_name } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![variable_to_set.json(), tag_name.json()],
                     vec![],
                 );
@@ -1450,7 +1450,7 @@ impl EntityAction {
             }
             EntityAction::SetInteractionSize { width, height } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![width.json(), height.json()], vec![]);
+                let item_args = compile(vec![width.json(), height.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1462,7 +1462,7 @@ impl EntityAction {
             }
             EntityAction::LSetArmor {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1474,7 +1474,7 @@ impl EntityAction {
             }
             EntityAction::SetCatType { skin_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![skin_type__tag.json()]);
+                let item_args = compile(vec![], vec![skin_type__tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1486,7 +1486,7 @@ impl EntityAction {
             }
             EntityAction::SetWearingSaddle { saddle_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![saddle_tag.json()]);
+                let item_args = compile(vec![], vec![saddle_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1498,7 +1498,7 @@ impl EntityAction {
             }
             EntityAction::SetShulkerBulletTarget { target_uuid } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![target_uuid.json()], vec![]);
+                let item_args = compile(vec![target_uuid.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1510,7 +1510,7 @@ impl EntityAction {
             }
             EntityAction::SetDisplayScale { x_scale, y_scale, z_scale } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![x_scale.json(), y_scale.json(), z_scale.json()],
                     vec![],
                 );
@@ -1525,7 +1525,7 @@ impl EntityAction {
             }
             EntityAction::SetTextDisplayLineWidth { line_width } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![line_width.json()], vec![]);
+                let item_args = compile(vec![line_width.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1537,7 +1537,7 @@ impl EntityAction {
             }
             EntityAction::SetTextDisplayTextAlignment { text_alignment_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![text_alignment_tag.json()]);
+                let item_args = compile(vec![], vec![text_alignment_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1555,7 +1555,7 @@ impl EntityAction {
                 inaccuracy,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         projectile_to_launch.json(), launch_point.json(), projectile_name
                         .json(), speed.json(), inaccuracy.json()
@@ -1573,7 +1573,7 @@ impl EntityAction {
             }
             EntityAction::SetDragonPhase { phase_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![phase_tag.json()]);
+                let item_args = compile(vec![], vec![phase_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1585,7 +1585,7 @@ impl EntityAction {
             }
             EntityAction::SetLlamaColor { llama_color_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![llama_color_tag.json()]);
+                let item_args = compile(vec![], vec![llama_color_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1597,7 +1597,7 @@ impl EntityAction {
             }
             EntityAction::SetVillagerBiome { biome_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![biome_tag.json()]);
+                let item_args = compile(vec![], vec![biome_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1609,7 +1609,7 @@ impl EntityAction {
             }
             EntityAction::SetCreeperFuse { fuse_ticks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![fuse_ticks.json()], vec![]);
+                let item_args = compile(vec![fuse_ticks.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1621,7 +1621,7 @@ impl EntityAction {
             }
             EntityAction::EnableAI {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1633,7 +1633,7 @@ impl EntityAction {
             }
             EntityAction::SettoBabyAdult { baby_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![baby_tag.json()]);
+                let item_args = compile(vec![], vec![baby_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1645,7 +1645,7 @@ impl EntityAction {
             }
             EntityAction::SetMooshroomType { mooshroom_variant_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![mooshroom_variant_tag.json()]);
+                let item_args = compile(vec![], vec![mooshroom_variant_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1657,7 +1657,7 @@ impl EntityAction {
             }
             EntityAction::SetInvisible { invisible_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![invisible_tag.json()]);
+                let item_args = compile(vec![], vec![invisible_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1669,7 +1669,7 @@ impl EntityAction {
             }
             EntityAction::SetDisplayBillboard { billboard_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![billboard_type__tag.json()]);
+                let item_args = compile(vec![], vec![billboard_type__tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1681,7 +1681,7 @@ impl EntityAction {
             }
             EntityAction::NoProjColl {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1693,7 +1693,7 @@ impl EntityAction {
             }
             EntityAction::EatGrass {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1705,7 +1705,7 @@ impl EntityAction {
             }
             EntityAction::SetCatResting { resting_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![resting_tag.json()]);
+                let item_args = compile(vec![], vec![resting_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1721,7 +1721,7 @@ impl EntityAction {
                 effect_particles_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![effects.json()],
                     vec![overwrite_effect_tag.json(), effect_particles_tag.json()],
                 );
@@ -1736,7 +1736,7 @@ impl EntityAction {
             }
             EntityAction::SetGoatHorns { left_horn_tag, right_horn_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![left_horn_tag.json(), right_horn_tag.json()],
                 );
@@ -1751,7 +1751,7 @@ impl EntityAction {
             }
             EntityAction::Tame { owner_uuid } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![owner_uuid.json()], vec![]);
+                let item_args = compile(vec![owner_uuid.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1763,7 +1763,7 @@ impl EntityAction {
             }
             EntityAction::SetGlowing { glowing_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![glowing_tag.json()]);
+                let item_args = compile(vec![], vec![glowing_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1775,7 +1775,7 @@ impl EntityAction {
             }
             EntityAction::SetGoatScreaming { screams_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![screams_tag.json()]);
+                let item_args = compile(vec![], vec![screams_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1787,7 +1787,7 @@ impl EntityAction {
             }
             EntityAction::SetItemDisplayModelType { model_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![model_type__tag.json()]);
+                let item_args = compile(vec![], vec![model_type__tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1799,7 +1799,7 @@ impl EntityAction {
             }
             EntityAction::SetCurrentHealth { current_health } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![current_health.json()], vec![]);
+                let item_args = compile(vec![current_health.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1811,7 +1811,7 @@ impl EntityAction {
             }
             EntityAction::DisguiseasMob { mob_to_disguise_as, display_name } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![mob_to_disguise_as.json(), display_name.json()],
                     vec![],
                 );
@@ -1826,7 +1826,7 @@ impl EntityAction {
             }
             EntityAction::DisguiseasBlock { block_to_disguise_as, display_name } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![block_to_disguise_as.json(), display_name.json()],
                     vec![],
                 );
@@ -1841,7 +1841,7 @@ impl EntityAction {
             }
             EntityAction::SetMinecartBlock { block_to_show, block_offset } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![block_to_show.json(), block_offset.json()],
                     vec![],
                 );
@@ -1856,7 +1856,7 @@ impl EntityAction {
             }
             EntityAction::SetFoxSleeping { sleeping_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![sleeping_tag.json()]);
+                let item_args = compile(vec![], vec![sleeping_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1868,7 +1868,7 @@ impl EntityAction {
             }
             EntityAction::SetCollidable { collision_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![collision_tag.json()]);
+                let item_args = compile(vec![], vec![collision_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1885,7 +1885,7 @@ impl EntityAction {
                 armor_stand_part_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![
                         direction.json(), y_rotation_c07c3607.json(), z_rotation_c07c3607
                         .json()
@@ -1907,7 +1907,7 @@ impl EntityAction {
                 launch_axis_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![launch_power.json()],
                     vec![add_to_current_velocity_tag.json(), launch_axis_tag.json()],
                 );
@@ -1922,7 +1922,7 @@ impl EntityAction {
             }
             EntityAction::SetFallDistance { fall_distance_blocks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![fall_distance_blocks.json()], vec![]);
+                let item_args = compile(vec![fall_distance_blocks.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1934,7 +1934,7 @@ impl EntityAction {
             }
             EntityAction::MovetoLocation { target_location, walk_speed } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![target_location.json(), walk_speed.json()],
                     vec![],
                 );
@@ -1949,7 +1949,7 @@ impl EntityAction {
             }
             EntityAction::SetTextDisplayTextOpacity { text_opacity } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![text_opacity.json()], vec![]);
+                let item_args = compile(vec![text_opacity.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1961,7 +1961,7 @@ impl EntityAction {
             }
             EntityAction::SetItemDisplayItem { displayed_item } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![displayed_item.json()], vec![]);
+                let item_args = compile(vec![displayed_item.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -1973,7 +1973,7 @@ impl EntityAction {
             }
             EntityAction::SetEquipmentItem { item_to_set, equipment_slot_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![item_to_set.json()],
                     vec![equipment_slot_tag.json()],
                 );
@@ -1988,7 +1988,7 @@ impl EntityAction {
             }
             EntityAction::SendMobAttackAnimation { animation_arm_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![animation_arm_tag.json()]);
+                let item_args = compile(vec![], vec![animation_arm_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2000,7 +2000,7 @@ impl EntityAction {
             }
             EntityAction::SetSilenced { silenced_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![silenced_tag.json()]);
+                let item_args = compile(vec![], vec![silenced_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2012,7 +2012,7 @@ impl EntityAction {
             }
             EntityAction::SetBeeHasNectar { has_nectar_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![has_nectar_tag.json()]);
+                let item_args = compile(vec![], vec![has_nectar_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2024,7 +2024,7 @@ impl EntityAction {
             }
             EntityAction::AttachLead { lead_holder_uuid } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![lead_holder_uuid.json()], vec![]);
+                let item_args = compile(vec![lead_holder_uuid.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2036,7 +2036,7 @@ impl EntityAction {
             }
             EntityAction::SetSnowGolemPumpkin { pumpkin_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![pumpkin_tag.json()]);
+                let item_args = compile(vec![], vec![pumpkin_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2048,10 +2048,7 @@ impl EntityAction {
             }
             EntityAction::SetCustomTag { tag_name, tag_value } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
-                    vec![tag_name.json(), tag_value.json()],
-                    vec![],
-                );
+                let item_args = compile(vec![tag_name.json(), tag_value.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2063,7 +2060,7 @@ impl EntityAction {
             }
             EntityAction::RemovePotionEffect { effects } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![effects.json()], vec![]);
+                let item_args = compile(vec![effects.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2075,7 +2072,7 @@ impl EntityAction {
             }
             EntityAction::Gravity {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2087,7 +2084,7 @@ impl EntityAction {
             }
             EntityAction::ShearSheep {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2102,7 +2099,7 @@ impl EntityAction {
                 equipment_slot_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![],
                     vec![interactions_tag.json(), equipment_slot_tag.json()],
                 );
@@ -2117,7 +2114,7 @@ impl EntityAction {
             }
             EntityAction::SetAllayDancing { dancing_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![dancing_tag.json()]);
+                let item_args = compile(vec![], vec![dancing_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2129,7 +2126,7 @@ impl EntityAction {
             }
             EntityAction::SetRabbitType { skin_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![skin_type__tag.json()]);
+                let item_args = compile(vec![], vec![skin_type__tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2141,7 +2138,7 @@ impl EntityAction {
             }
             EntityAction::SetDisplayViewRange { view_range_in_blocks } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![view_range_in_blocks.json()], vec![]);
+                let item_args = compile(vec![view_range_in_blocks.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2153,7 +2150,7 @@ impl EntityAction {
             }
             EntityAction::SetSize { size } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![size.json()], vec![]);
+                let item_args = compile(vec![size.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2165,7 +2162,7 @@ impl EntityAction {
             }
             EntityAction::NoAI {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2177,7 +2174,7 @@ impl EntityAction {
             }
             EntityAction::ShowName {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2192,7 +2189,7 @@ impl EntityAction {
                 display_skin,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![player_name_to_disguise_as.json(), display_skin.json()],
                     vec![],
                 );
@@ -2207,7 +2204,7 @@ impl EntityAction {
             }
             EntityAction::SetAngry { angry_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![angry_tag.json()]);
+                let item_args = compile(vec![], vec![angry_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2219,7 +2216,7 @@ impl EntityAction {
             }
             EntityAction::SetEntityItem { new_item } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![new_item.json()], vec![]);
+                let item_args = compile(vec![new_item.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2231,7 +2228,7 @@ impl EntityAction {
             }
             EntityAction::Explode {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2243,7 +2240,7 @@ impl EntityAction {
             }
             EntityAction::SetWardenDigging { digging_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![digging_type__tag.json()]);
+                let item_args = compile(vec![], vec![digging_type__tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2255,7 +2252,7 @@ impl EntityAction {
             }
             EntityAction::MoveTo {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2267,7 +2264,7 @@ impl EntityAction {
             }
             EntityAction::Undisguise {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2279,7 +2276,7 @@ impl EntityAction {
             }
             EntityAction::SetDeathDropsEnabled { has_death_drops_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![has_death_drops_tag.json()]);
+                let item_args = compile(vec![], vec![has_death_drops_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2291,7 +2288,7 @@ impl EntityAction {
             }
             EntityAction::SetPersistent { persistent_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![persistent_tag.json()]);
+                let item_args = compile(vec![], vec![persistent_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2303,7 +2300,7 @@ impl EntityAction {
             }
             EntityAction::SetVillagerExperience { experience } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![experience.json()], vec![]);
+                let item_args = compile(vec![experience.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2315,7 +2312,7 @@ impl EntityAction {
             }
             EntityAction::IgniteCreeper {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2327,7 +2324,7 @@ impl EntityAction {
             }
             EntityAction::SetCelebrating { celebrate_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![celebrate_tag.json()]);
+                let item_args = compile(vec![], vec![celebrate_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2339,7 +2336,7 @@ impl EntityAction {
             }
             EntityAction::SetProjectileDisplayItem { display_item } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![display_item.json()], vec![]);
+                let item_args = compile(vec![display_item.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2355,7 +2352,7 @@ impl EntityAction {
                 inherit_styles_tag,
             } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(
+                let item_args = compile(
                     vec![displayed_text.json()],
                     vec![text_value_merging_tag.json(), inherit_styles_tag.json()],
                 );
@@ -2370,7 +2367,7 @@ impl EntityAction {
             }
             EntityAction::SetHorseJumpStrength { strength } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![strength.json()], vec![]);
+                let item_args = compile(vec![strength.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2382,7 +2379,7 @@ impl EntityAction {
             }
             EntityAction::SetNameColor { name_color_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![name_color_tag.json()]);
+                let item_args = compile(vec![], vec![name_color_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2394,7 +2391,7 @@ impl EntityAction {
             }
             EntityAction::Unsilence {} => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![]);
+                let item_args = compile(vec![], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2406,7 +2403,7 @@ impl EntityAction {
             }
             EntityAction::SetCarryingChest { carrying_chest_tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![carrying_chest_tag.json()]);
+                let item_args = compile(vec![], vec![carrying_chest_tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2418,7 +2415,7 @@ impl EntityAction {
             }
             EntityAction::RamTarget { target_uuid } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![target_uuid.json()], vec![]);
+                let item_args = compile(vec![target_uuid.json()], vec![]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
@@ -2430,7 +2427,7 @@ impl EntityAction {
             }
             EntityAction::SetFoxType { fox_type__tag } => {
                 let mut map = serde_json::Map::new();
-                let mut item_args = compile(vec![], vec![fox_type__tag.json()]);
+                let item_args = compile(vec![], vec![fox_type__tag.json()]);
                 let mut args = serde_json::Map::new();
                 args.insert("items".to_string(), serde_json::Value::Array(item_args));
                 map.insert(
